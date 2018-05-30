@@ -21,17 +21,25 @@ bin/console psysh
 
 ls
 $em = $container->get('doctrine')->getManager()
-$jose = new App\Entity\User
-$jose->setUsername('jose')
-$jose->setPassword('j123')
-$em->persist($jose)
-$em->flush()
+
+
+    $jose = new App\Entity\User
+    $jose->setUsername('jose')
+    $password = $container->get('security.password_encoder')->encodePassword($jose, 'jose123')
+    $jose->setPassword($password)
+    $em->persist($jose)
+    $em->flush()
 
 $users = $em->getRepository('App\Entity\User')->findAll();
 $users[0]->getUsername()
 
 $user1 = $em->getRepository('App\Entity\User')->find(1)
 $users1->getUsername()
+
+
+$encoded = $encoder->encodePassword($user, $request->get('password'));
+ $user->setPassword($encoded);
+
 
 
 php bin/console make:crud User

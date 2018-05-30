@@ -64,15 +64,21 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $encoded = $encoder->encodePassword($user, $request->get('password'));
-            $user->setPassword($encoded);
+            $data = $request->request->all(); // In this case, we can not use: $data = $form->getData();
 
-            $this->getDoctrine()->getManager()->flush();
+            if(!empty($data['user']['password'])){
+                $encoded = $encoder->encodePassword($user, $data['user']['password']);
+                $user->setPassword($encoded);
+                $em->persist($user);
+            }
+
+            $em->flush();
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 
