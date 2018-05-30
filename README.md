@@ -29,3 +29,9 @@ Aplicar esquema no banco de dados:
 Criar usuário *admin* com senha *admin*:
 
     php bin/console doctrine:fixtures:load
+
+Estre projeto usa adminlte, que tem esse setup adicional:
+
+    sudo npm install -g bower
+    sudo ln -s /usr/bin/bower /usr/local/bin/bower
+    php bin/console avanzu:admin:fetch-vendor
