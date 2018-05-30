@@ -1,49 +1,51 @@
-# symfony_base4localuser
+# Symfony 4 Traditional Login Form with user from Database
 
-    composer create-project symfony/website-skeleton symfony_base4localuser
+This project is an basic implementation of traditional login form 
+with users from database on symfony, as described in the
+https://symfony.com/doc/current/security/form_login_setup.html.
 
-# Pacotes de desenvolvimento
+Included:
 
-    composer require --dev symfony/web-server-bundle theofidry/psysh-bundle doctrine/doctrine-fixtures-bundle
+ - login and logout routes configured
+ - crud for manage users in database
+ - passwords encoded with bcrypt
 
-campos username e password
+Not Included:
 
-php bin/console make:entity User
+ - Registration to anonymous
+ - Area to user to change the own password (for while)
 
-migrations:
+The main reason for this project is to be a start point to
+another projects thet depends of local users to work.
 
-php bin/console doctrine:migrations:diff
-php bin/console doctrine:migrations:migrate
+# Deploy
 
+Download:
 
+    git clone git@github.com:thiagogomesverissimo/symfony_traditional_login_form_users_from_db.git
+    cd symfony_traditional_login_form_users_from_db
+    composer install
 
-bin/console psysh
+Run migrations:
 
-ls
-$em = $container->get('doctrine')->getManager()
+    php bin/console doctrine:migrations:migrate
 
+Create a user *admin* with password *admin* to manage the others:
 
-    $jose = new App\Entity\User
-    $jose->setUsername('jose')
-    $password = $container->get('security.password_encoder')->encodePassword($jose, 'jose123')
-    $jose->setPassword($password)
-    $em->persist($jose)
+    php bin/console doctrine:fixtures:load
+
+If you prefer to create the user with console:
+
+    bin/console psysh
+    $em = $container->get('doctrine')->getManager()
+    $admin = new App\Entity\User
+    $admin->setUsername('admin')
+    $password = $container->get('security.password_encoder')->encodePassword($jose, 'admin')
+    $admin->setPassword($password)
+    $em->persist($admin)
     $em->flush()
 
-$users = $em->getRepository('App\Entity\User')->findAll();
-$users[0]->getUsername()
+Up server:
 
-$user1 = $em->getRepository('App\Entity\User')->find(1)
-$users1->getUsername()
-
-
-$encoded = $encoder->encodePassword($user, $request->get('password'));
- $user->setPassword($encoded);
-
-
-
-php bin/console make:crud User
-
-
-
+    php bin/console server:run
 
