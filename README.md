@@ -4,7 +4,7 @@
 
 # Pacotes de desenvolvimento
 
-    composer require --dev symfony/web-server-bundle theofidry/psysh-bundle 
+    composer require --dev symfony/web-server-bundle theofidry/psysh-bundle doctrine/doctrine-fixtures-bundle
 
 campos username e password
 

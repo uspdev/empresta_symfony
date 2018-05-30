@@ -11,7 +11,7 @@ security:
             security: false
         main:
             anonymous: true
-            providers: db
+            provider: db
             form_login:
                 login_path: login
                 check_path: login
