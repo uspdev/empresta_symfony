@@ -1,51 +1,31 @@
-# Symfony 4 Traditional Login Form with user from Database
+# Empresta
 
-This project is an basic implementation of traditional login form 
-with users from database on symfony, as described in the
-https://symfony.com/doc/current/security/form_login_setup.html.
+Sistema para empréstimo de materiais (armários, CDs, Fones etc) durante a
+permanência dos usuários na Biblioteca. O material deve ter um código 
+identificador inteiro que será lido com código de barra.
 
-Included:
+Ações:
 
- - login and logout routes configured
- - crud for manage users in database
- - passwords encoded with bcrypt
-
-Not Included:
-
- - Registration to anonymous
- - Area to user to change the own password (for while)
-
-The main reason for this project is to be a start point to
-another projects thet depends of local users to work.
+ - Gerenciamento dos materiais que serão emprestados
+ - Empréstimo para pessoa USP (dados da replicação, tabelas PESSOA e/ou CATR_CRACHA)
+ - Empréstimo para pessoa visitante (externa à USP) - mediante cadastro prévio
+ - Cadastro local de pessoas externas à USP
+ - Listagem dos materiais emprestados e não devolvidos
+ - Não permite emprestar mais que um material por pessoa
+ - Ativar ou desativar material
 
 # Deploy
 
 Download:
 
-    git clone git@github.com:thiagogomesverissimo/symfony_traditional_login_form_users_from_db.git
-    cd symfony_traditional_login_form_users_from_db
+    git clone https://github.com/uspdev/empresta.git
+    cd empresta
     composer install
 
-Run migrations:
+Aplicar esquema no banco de dados:
 
     php bin/console doctrine:migrations:migrate
 
-Create a user *admin* with password *admin* to manage the others:
+Criar usuário *admin* com senha *admin*:
 
     php bin/console doctrine:fixtures:load
-
-If you prefer to create the user with console:
-
-    bin/console psysh
-    $em = $container->get('doctrine')->getManager()
-    $admin = new App\Entity\User
-    $admin->setUsername('admin')
-    $password = $container->get('security.password_encoder')->encodePassword($jose, 'admin')
-    $admin->setPassword($password)
-    $em->persist($admin)
-    $em->flush()
-
-Up server:
-
-    php bin/console server:run
-
