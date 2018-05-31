@@ -1,11 +1,36 @@
 {% extends '@UspdevBootstrapDashboard/base.html.twig' %}
 
+{% block title %} {{ system_name | default('Empréstimos') }} {% endblock %}
+{% block system_name %} {{ system_name | default('Empréstimos') }} {% endblock %}
+
+{% block search %}
+        {{ system_name | default('Biblioteca') }}
+{% endblock %}
+
 {% block user %}
     {% if is_granted('ROLE_USER') %}
         <a class="btn btn-danger" href=" {{ path('logout') }}">logout</a>
     {% else %}
         <a class="btn btn-success" href=" {{ path('login') }}">login</a>
     {% endif %}
+{% endblock %}
+
+{% block sidebar %} 
+<ul class="nav flex-column">             
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ path('user_index') }}">
+            <span data-feather="home"></span>
+            Usuários 
+            <span class="sr-only">(current)</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <span data-feather="file"></span>
+            Reports
+        </a>
+    </li>
+</ul>
 {% endblock %}
 
 {% block body %}
