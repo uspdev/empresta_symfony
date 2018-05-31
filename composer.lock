@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a67921c1e389ab3d0733e2e7f81ab6e",
+    "content-hash": "54181284119ef3902264cc56a2ef16d0",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4612,6 +4612,57 @@
             "time": "2018-04-02T09:24:19+00:00"
         },
         {
+            "name": "uspdev/bootstrap-dashboard-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uspdev/bootstrap-dashboard-bundle.git",
+                "reference": "412ee1e8eedf955d85d6a91ab6b9f0177a50977e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uspdev/bootstrap-dashboard-bundle/zipball/412ee1e8eedf955d85d6a91ab6b9f0177a50977e",
+                "reference": "412ee1e8eedf955d85d6a91ab6b9f0177a50977e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0.8",
+                "symfony/config": "^3.4|^4.0",
+                "symfony/console": "^3.4|^4.0",
+                "symfony/dependency-injection": "^3.4|^4.0",
+                "symfony/framework-bundle": "^3.4|^4.0",
+                "symfony/http-kernel": "^3.4|^4.0"
+            },
+            "require-dev": {
+                "allocine/twigcs": "^3.0",
+                "symfony/process": "^3.4|^4.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Uspdev\\BootstrapDashboardBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Gomes Veríssimo",
+                    "email": "thiago.verissimo@usp.br",
+                    "homepage": "https://github.com/thiagogomesverissimo"
+                }
+            ],
+            "description": "Dashboard from Bootstrap Examples",
+            "homepage": "https://github.com/uspdev/bootstrap-dashboard-bundle",
+            "keywords": [
+                "bootstrap",
+                "dashboard"
+            ],
+            "time": "2018-05-31T18:24:38+00:00"
+        },
+        {
             "name": "webmozart/assert",
             "version": "1.3.0",
             "source": {
@@ -6057,7 +6108,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "symfony/lts": 20
+        "symfony/lts": 20,
+        "uspdev/bootstrap-dashboard-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
