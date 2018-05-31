@@ -1,12 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{% extends '@UspdevBootstrapDashboard/base.html.twig' %}
+
+{% block user %}
+    {% if is_granted('ROLE_USER') %}
+        <a class="btn btn-danger" href=" {{ path('logout') }}">logout</a>
+    {% else %}
+        <a class="btn btn-success" href=" {{ path('login') }}">login</a>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% for msg in app.session.flashBag.get('success') %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>   
+    {% endfor %}
+
+    {% for msg in app.session.flashBag.get('danger') %}
+        <div class="alert alert-danger">
+            {{ msg }}
+        </div>   
+    {% endfor %}
+
+    {{ parent() }}
+{% endblock %}
+                
+
+
