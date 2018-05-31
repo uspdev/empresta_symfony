@@ -4617,12 +4617,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/bootstrap-dashboard-bundle.git",
-                "reference": "412ee1e8eedf955d85d6a91ab6b9f0177a50977e"
+                "reference": "a5edb7acbba718b9d8e6e5e1e3a262fa7896fa23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/bootstrap-dashboard-bundle/zipball/412ee1e8eedf955d85d6a91ab6b9f0177a50977e",
-                "reference": "412ee1e8eedf955d85d6a91ab6b9f0177a50977e",
+                "url": "https://api.github.com/repos/uspdev/bootstrap-dashboard-bundle/zipball/a5edb7acbba718b9d8e6e5e1e3a262fa7896fa23",
+                "reference": "a5edb7acbba718b9d8e6e5e1e3a262fa7896fa23",
                 "shasum": ""
             },
             "require": {
@@ -4640,7 +4640,7 @@
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "Uspdev\\BootstrapDashboardBundle\\": "src/"
+                    "Uspdev\\BootstrapDashboardBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4660,7 +4660,7 @@
                 "bootstrap",
                 "dashboard"
             ],
-            "time": "2018-05-31T18:24:38+00:00"
+            "time": "2018-05-31T19:51:01+00:00"
         },
         {
             "name": "webmozart/assert",

@@ -16,5 +16,5 @@ return [
     Symfony\Bundle\WebServerBundle\WebServerBundle::class => ['dev' => true],
     Fidry\PsyshBundle\PsyshBundle::class => ['dev' => true, 'test' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
-    Uspdev\BootstrapDashboardBundle\BootstrapDashboardBundle::class => ['all' => true],
+    Uspdev\BootstrapDashboardBundle\UspdevBootstrapDashboardBundle::class => ['all' => true],
 ];
