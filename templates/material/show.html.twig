@@ -37,8 +37,14 @@
             {% for emprestimo in pagination %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
 
-                <td>{% if emprestimo.dataEmprestimo %}{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}{% endif %}</td>
-                <td>{% if emprestimo.dataDevolucao %}{{ emprestimo.dataDevolucao|date('H:i:s (d/m/Y)') }}{% endif %}</td>
+                <td>{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}</td>
+                <td>
+                    {% if emprestimo.dataDevolucao %}
+                        {{ emprestimo.dataDevolucao|date('H:i:s (d/m/Y)') }}
+                    {% else %}
+                        <b>Item ainda não devolvido</b>
+                    {% endif %}
+                </td>
                 <td>
                     {% if emprestimo.visitante is empty %}
                         {{ emprestimo.codpes }}
