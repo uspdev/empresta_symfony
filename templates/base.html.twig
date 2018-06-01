@@ -34,6 +34,7 @@
 {% endblock %}
 
 {% block body %}
+
     {% for msg in app.session.flashBag.get('success') %}
         <div class="alert alert-success">
             {{ msg }}
@@ -45,6 +46,10 @@
             {{ msg }}
         </div>   
     {% endfor %}
+
+    {% if form is defined %}
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {% endif %}
 
     {{ parent() }}
 {% endblock %}

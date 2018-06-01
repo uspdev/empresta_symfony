@@ -4617,12 +4617,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/bootstrap-dashboard-bundle.git",
-                "reference": "7d1fd345e324cfb23a0a0a3e400898bf8b20f1ed"
+                "reference": "91267043f1cbfb956fe29bfae5d139696429e095"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/bootstrap-dashboard-bundle/zipball/7d1fd345e324cfb23a0a0a3e400898bf8b20f1ed",
-                "reference": "7d1fd345e324cfb23a0a0a3e400898bf8b20f1ed",
+                "url": "https://api.github.com/repos/uspdev/bootstrap-dashboard-bundle/zipball/91267043f1cbfb956fe29bfae5d139696429e095",
+                "reference": "91267043f1cbfb956fe29bfae5d139696429e095",
                 "shasum": ""
             },
             "require": {
@@ -4660,7 +4660,7 @@
                 "bootstrap",
                 "dashboard"
             ],
-            "time": "2018-05-31T19:57:27+00:00"
+            "time": "2018-06-01T01:21:56+00:00"
         },
         {
             "name": "webmozart/assert",
