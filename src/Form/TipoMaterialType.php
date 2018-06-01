@@ -13,7 +13,6 @@ class TipoMaterialType extends AbstractType
     {
         $builder
             ->add('nome')
-            ->add('prefixo')
         ;
     }
 

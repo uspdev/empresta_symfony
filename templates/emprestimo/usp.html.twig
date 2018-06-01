@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <br>
+    {{ parent() }}
     <h1>Empréstimo para pessoa USP</h1>
 
 
     {{ form_start(form) }}
         {{ form_row(form.material,{'label': 'Código'}) }}
         {{ form_row(form.codpes,{'label': 'Número USP'}) }}
-        <button type="submit" class="btn btn-primary"> Fazer Empréstimo </button>
+        <button type="submit" class="btn btn-primary"> Emprestar </button>
     {{ form_end(form) }}
 
 {% endblock %}

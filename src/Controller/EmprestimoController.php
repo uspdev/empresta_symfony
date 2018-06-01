@@ -49,13 +49,12 @@ class EmprestimoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $emprestimo = new Emprestimo();
 
-
         $form = $this->createForm('App\Form\EmprestimoUspType', $emprestimo);
         $form->handleRequest($request);
-/*
-        $armarios_indisponiveis = $em->getRepository('AppBundle:Emprestimo')
-            ->findby(['dataDevolucao'=>null],array('armario' => 'ASC'));
-*/
+
+        $armarios_indisponiveis = $em->getRepository('App:Emprestimo')
+            ->findby(['dataDevolucao'=>null],array('material' => 'ASC'));
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Verifica se usuário existe na tabela pessoa
@@ -68,16 +67,15 @@ class EmprestimoController extends Controller
                 $this->addFlash('danger', sprintf('Armário não emprestado! Pessoa %s não encontrada na USP',$emprestimo->getPessoaUsp()));
                 return $this->redirectToRoute('emprestimo_pessoausp_new');
             }
-
+*/
             // Verifica se armário já não está reservado
             foreach($armarios_indisponiveis as $x){
-                if($emprestimo->getArmario() === $x->getArmario()){
-                    $this->addFlash('danger', sprintf('Armário não emprestado! Armário %s já está emprestado, 
-                        por favor escolha outro armário!',$emprestimo->getArmario()));
-                    return $this->redirectToRoute('emprestimo_pessoausp_new');
+                if($emprestimo->getMaterial() === $x->getMaterial()){
+                    $this->addFlash('danger', sprintf('Erro: Item %s já está emprestado para outra pessoa!',$emprestimo->getMaterial()->getCodigo()));
+                    return $this->redirectToRoute('emprestimo_usp');
                 }
             }
-
+/*
             // Verificar se a pessoa já não possui armário emprestado
             foreach($armarios_indisponiveis as $x){
                 if($emprestimo->getPessoaUsp() == $x->getPessoaUsp()){
@@ -183,22 +181,24 @@ class EmprestimoController extends Controller
         $form = $this->createForm('App\Form\DevolucaoType',$emprestimo);
         $form->handleRequest($request);
 
-//        $armarios_indisponiveis = $em->getRepository('AppBundle:Emprestimo')->findby(['dataDevolucao'=>null],array('armario' => 'ASC'));
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
             // Verifica se o armário está de fato emprestado
-            $emprestado = $em->getRepository('App:Emprestimo')->findOneby(['dataDevolucao'=>null,'material'=>$emprestimo->getMaterial()]);
+            $emprestado = $em->getRepository('App:Emprestimo')
+                             ->findOneby(['dataDevolucao'=>null,'material'=>$emprestimo->getMaterial()]);
 
             if(!$emprestado)
             {
-                $this->addFlash('danger', sprintf('Atenção: o item %s não está emprestado!',$emprestimo->getMaterial()));
+                $this->addFlash('danger', sprintf('Atenção: o item %s não está emprestado!',
+                                $emprestimo->getMaterial()->getCodigo()));
                 return $this->redirectToRoute('emprestimo_devolucao');
             }
 
             $emprestado->setDataDevolucao(new \DateTime());
             $em->flush();
-            $this->addFlash('success', sprintf('Item %s devolvido com Sucesso!',$emprestimo->getMaterial()));
+            $this->addFlash('success', sprintf('Item %s devolvido com Sucesso!',
+                            $emprestimo->getMaterial()->getCodigo()));
             return $this->redirectToRoute('emprestimo_devolucao');
         }
 

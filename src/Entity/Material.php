@@ -6,8 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\Emprestimo;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MaterialRepository")
+ * @UniqueEntity("codigo", message="Esse código já está em uso")
  */
 class Material
 {
@@ -66,12 +69,12 @@ class Material
         return $this;
     }
 
-    public function getCodigo(): ?int
+    public function getCodigo(): ?string
     {
         return $this->codigo;
     }
 
-    public function setCodigo(int $codigo): self
+    public function setCodigo(string $codigo): self
     {
         $this->codigo = $codigo;
 

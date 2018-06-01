@@ -3,20 +3,7 @@
 {% block title %}TipoMaterial{% endblock %}
 
 {% block body %}
-    <h1>TipoMaterial</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ tipo_material.id }}</td>
-            </tr>
-            <tr>
-                <th>Nome</th>
-                <td>{{ tipo_material.nome }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h1>Categoria: {{ tipo_material.nome }} </h1>
 
     <a href="{{ path('tipo_material_index') }}">back to list</a>
 

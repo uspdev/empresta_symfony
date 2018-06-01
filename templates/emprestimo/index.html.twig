@@ -9,7 +9,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Item</th>
+                <th>Código</th>
                 <th>Tipo</th>
                 <th>Data do empréstimo</th>
                 <th>Pessoa</th>
@@ -18,7 +18,7 @@
         <tbody>
         {% for emprestimo in emprestimos %}
             <tr>
-                <td>{{ emprestimo.material }}</td>
+                <td>{{ emprestimo.material.codigo }}</td>
                 <td>{{ emprestimo.material.tipo }}</td>
                 <td>{% if emprestimo.dataEmprestimo %}{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}{% endif %}</td>
 

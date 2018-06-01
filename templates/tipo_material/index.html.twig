@@ -3,12 +3,11 @@
 {% block title %}TipoMaterial index{% endblock %}
 
 {% block body %}
-    <h1>TipoMaterial index</h1>
+    <h1>Categorias dos itens de empréstimo</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nome</th>
                 <th>actions</th>
             </tr>
@@ -16,7 +15,6 @@
         <tbody>
         {% for tipo_material in tipo_materials %}
             <tr>
-                <td>{{ tipo_material.id }}</td>
                 <td>{{ tipo_material.nome }}</td>
                 <td>
                     <a href="{{ path('tipo_material_show', {'id': tipo_material.id}) }}">show</a>

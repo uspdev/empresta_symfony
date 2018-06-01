@@ -3,23 +3,23 @@
 {% block title %}Material index{% endblock %}
 
 {% block body %}
-    <h1>Material index</h1>
+    <h1>Materiais para Empréstimo</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Código</th>
+                <th>Tipo</th>
                 <th>Ativo</th>
-                <th>Codigo</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for material in materials %}
             <tr>
-                <td>{{ material.id }}</td>
-                <td>{{ material.ativo ? 'Yes' : 'No' }}</td>
                 <td>{{ material.codigo }}</td>
+                <td>{{ material.tipo }}</td>
+                <td>{{ material.ativo ? 'Sim' : 'Não' }}</td>
                 <td>
                     <a href="{{ path('material_show', {'id': material.id}) }}">show</a>
                     <a href="{{ path('material_edit', {'id': material.id}) }}">edit</a>

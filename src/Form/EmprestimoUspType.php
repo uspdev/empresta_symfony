@@ -10,8 +10,16 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+use App\Form\DataTransformer\MaterialTransformer;
+
 class EmprestimoUspType extends AbstractType
 {
+    private $transformer;
+
+    public function __construct(MaterialTransformer $transformer)
+    {
+        $this->transformer = $transformer;
+    }
 
     /**
      * {@inheritdoc}
@@ -22,7 +30,14 @@ class EmprestimoUspType extends AbstractType
             'required'  => true,
         ]);
 
-        $builder->add('material');
+        $builder->add('material',TextType::class,[
+            'required'  => true,
+            'invalid_message' => 'Item não encontrado. Código Inexistente',
+        ]);
+
+       $builder->get('material')
+            ->addModelTransformer($this->transformer);
+
     }
     /**
      * {@inheritdoc}

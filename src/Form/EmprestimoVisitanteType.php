@@ -9,18 +9,34 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Form\DataTransformer\MaterialTransformer;
 
 class EmprestimoVisitanteType extends AbstractType
 {
+    private $transformer;
+
+    public function __construct(MaterialTransformer $transformer)
+    {
+        $this->transformer = $transformer;
+    }
 
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('material')
-                ->add('visitante');
+        $builder->add('visitante');
+
+        $builder->add('material',TextType::class,[
+            'required'  => true,
+            'invalid_message' => 'Item não encontrado. Código Inexistente',
+        ]);
+
+       $builder->get('material')
+            ->addModelTransformer($this->transformer);
+
     }
+
     
     /**
      * {@inheritdoc}
