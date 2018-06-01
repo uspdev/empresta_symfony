@@ -51,7 +51,16 @@ class MaterialController extends Controller
      */
     public function show(Material $material): Response
     {
-        return $this->render('material/show.html.twig', ['material' => $material]);
+        // Empréstimos realizados
+        $em = $this->getDoctrine()->getManager();
+        $emprestimos = $em->getRepository('App:Emprestimo')->findBy([
+            'material' => $material->getId(),
+        ]);
+
+        return $this->render('material/show.html.twig', [
+            'material'    => $material,
+            'emprestimos' => $emprestimos
+            ]);
     }
 
     /**
