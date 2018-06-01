@@ -6,7 +6,6 @@ use App\Entity\Emprestimo;
 
 use App\Entity\Material;
 use App\Repository\MaterialRepository;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -52,10 +51,15 @@ class EmprestimoController extends Controller
         $form = $this->createForm('App\Form\EmprestimoUspType', $emprestimo);
         $form->handleRequest($request);
 
-        $armarios_indisponiveis = $em->getRepository('App:Emprestimo')
-            ->findby(['dataDevolucao'=>null],array('material' => 'ASC'));
+
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if(!$this->estaDisponivel($emprestimo)){
+                $this->addFlash('danger', sprintf('Erro: Item %s já está emprestado para outra pessoa!',
+                                $emprestimo->getMaterial()->getCodigo()));
+                return $this->redirectToRoute('emprestimo_usp');
+            }
+
 
             // Verifica se usuário existe na tabela pessoa
  //           $pessoa = $this->get('Fflch\Replicado\Pessoa')->pessoaByCodpes($emprestimo->getPessoaUsp());
@@ -68,13 +72,8 @@ class EmprestimoController extends Controller
                 return $this->redirectToRoute('emprestimo_pessoausp_new');
             }
 */
-            // Verifica se armário já não está reservado
-            foreach($armarios_indisponiveis as $x){
-                if($emprestimo->getMaterial() === $x->getMaterial()){
-                    $this->addFlash('danger', sprintf('Erro: Item %s já está emprestado para outra pessoa!',$emprestimo->getMaterial()->getCodigo()));
-                    return $this->redirectToRoute('emprestimo_usp');
-                }
-            }
+
+
 /*
             // Verificar se a pessoa já não possui armário emprestado
             foreach($armarios_indisponiveis as $x){
@@ -96,7 +95,6 @@ class EmprestimoController extends Controller
             $nome = $pessoa ? $pessoa[0]['PESSOA_nompes'] : $cracha[0]['CATR_CRACHA_nompescra'];
 */   
             $emprestimo->setDataEmprestimo(new \DateTime());
-
             $em->persist($emprestimo);
             $em->flush();
 
@@ -122,20 +120,17 @@ class EmprestimoController extends Controller
         $form = $this->createForm('App\Form\EmprestimoVisitanteType', $emprestimo);
         $form->handleRequest($request);
 
-//        $armarios_indisponiveis = $em->getRepository('AppBundle:Emprestimo')->findby(['dataDevolucao'=>null],array('armario' => 'ASC'));
+
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if(!$this->estaDisponivel($emprestimo)){
+                $this->addFlash('danger', sprintf('Erro: Item %s já está emprestado para outra pessoa!',
+                                $emprestimo->getMaterial()->getCodigo()));
+                return $this->redirectToRoute('emprestimo_usp');
+            }
            
 /*
-            //verifica se o armário já não está emprestado
-            foreach($armarios_indisponiveis as $x){
-                if($emprestimo->getArmario() == $x->getArmario()){
-                    $this->addFlash('danger', 
-                        sprintf('Armário não emprestado! Armário %s já está emprestado, por favor escolha outro armário!',$emprestimo->getArmario()
-                    ));
-                    return $this->redirectToRoute('emprestimo_pessoaexterna_new');
-                }
-            }
 
             // Verificar se a pessoa já não possui armário emprestado
             foreach($armarios_indisponiveis as $x){
@@ -245,4 +240,24 @@ class EmprestimoController extends Controller
         ;
     }
 
+   /********************************** Utils Functions *****************************************/
+
+    public function emprestados()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $emprestados = $em->getRepository('App:Emprestimo')->findby(['dataDevolucao'=>null],array('material' => 'ASC'));
+        return $emprestados;
+    }
+
+    public function estaDisponivel($check)
+    {
+        $emprestados = $this->emprestados();
+
+        foreach($emprestados as $emprestado){
+            if($check->getMaterial() === $emprestado->getMaterial()){
+                return false;
+            }
+        }
+        return true;
+    }
 }
