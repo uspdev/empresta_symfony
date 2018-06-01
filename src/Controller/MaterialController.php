@@ -47,20 +47,33 @@ class MaterialController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="material_show", methods="GET")
+     * @Route("/{id}", name="material_show", methods="GET|POST")
      */
-    public function show(Material $material): Response
+    public function show(Material $material,Request $request): Response
     {
         // Empréstimos realizados
         $em = $this->getDoctrine()->getManager();
-        $emprestimos = $em->getRepository('App:Emprestimo')->findBy([
-            'material' => $material->getId(),
-        ]);
 
+        $repository = $em->getRepository('App:Emprestimo');
+        $query = $repository->createQueryBuilder('a')
+            ->innerJoin('a.material', 'g')
+            ->where('g.id = :material_id')
+            ->setParameter('material_id', $material->getId())
+            ->orderBy('a.dataDevolucao', 'ASC')
+            ->getQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+        // parameters to template
         return $this->render('material/show.html.twig', [
             'material'    => $material,
-            'emprestimos' => $emprestimos
-            ]);
+            'pagination' => $pagination,
+        ]);
     }
 
     /**

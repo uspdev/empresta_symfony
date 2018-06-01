@@ -17,39 +17,42 @@
             </tr>
         </tbody>
     </table>
-
     <a href="{{ path('material_index') }}" class='btn btn-success' >Voltar</a>
-
     <a href="{{ path('material_edit', {'id': material.id}) }}" class='btn btn-success'>Editar</a>
 
    <hr>
-   <h2>Empréstimos concluídos desse item</h2>
-   <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Empréstimo</th>
-                <th>Devolução</th>
-                <th>Pessoa</th>
+   <h2>Empréstimos concluídos</h2>
 
-            </tr>
+    Quantidade de empréstimos realizados: {{ pagination.getTotalItemCount }}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>{{ knp_pagination_sortable(pagination, 'Empréstimo', ['a.dataEmprestimo']) }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Devolução', ['a.dataDevolucao']) }}</th>
+            <th{% if pagination.isSorted('a.codpes') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Pessoa', 'a.codpes') }}</th>
+        </tr>
         </thead>
+
         <tbody>
-        {% for emprestimo in emprestimos %}
-            <tr>
+            {% for emprestimo in pagination %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
 
                 <td>{% if emprestimo.dataEmprestimo %}{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}{% endif %}</td>
                 <td>{% if emprestimo.dataDevolucao %}{{ emprestimo.dataDevolucao|date('H:i:s (d/m/Y)') }}{% endif %}</td>
-
                 <td>
                     {% if emprestimo.visitante is empty %}
                         {{ emprestimo.codpes }}
                     {% else %}
                         {{ emprestimo.visitante }}
                     {% endif %}
-                </td>
-                 
+                </td> 
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
 {% endblock %}
