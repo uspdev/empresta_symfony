@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TipoMaterial{% endblock %}
+
+{% block body %}
+    <h1>Create new TipoMaterial</h1>
+
+    {{ include('tipo_material/_form.html.twig') }}
+
+    <a href="{{ path('tipo_material_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TipoMaterial{% endblock %}
+
+{% block body %}
+    <h1>TipoMaterial</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tipo_material.id }}</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>{{ tipo_material.nome }}</td>
+            </tr>
+            <tr>
+                <th>Prefixo</th>
+                <td>{{ tipo_material.prefixo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('tipo_material_index') }}">back to list</a>
+
+    <a href="{{ path('tipo_material_edit', {'id': tipo_material.id}) }}">edit</a>
+
+    {{ include('tipo_material/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Material{% endblock %}
+
+{% block body %}
+    <h1>Material</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ material.id }}</td>
+            </tr>
+            <tr>
+                <th>Ativo</th>
+                <td>{{ material.ativo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Codigo</th>
+                <td>{{ material.codigo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('material_index') }}">back to list</a>
+
+    <a href="{{ path('material_edit', {'id': material.id}) }}">edit</a>
+
+    {{ include('material/_delete_form.html.twig') }}
+{% endblock %}

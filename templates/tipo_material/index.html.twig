@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TipoMaterial index{% endblock %}
+
+{% block body %}
+    <h1>TipoMaterial index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Prefixo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipo_material in tipo_materials %}
+            <tr>
+                <td>{{ tipo_material.id }}</td>
+                <td>{{ tipo_material.nome }}</td>
+                <td>{{ tipo_material.prefixo }}</td>
+                <td>
+                    <a href="{{ path('tipo_material_show', {'id': tipo_material.id}) }}">show</a>
+                    <a href="{{ path('tipo_material_edit', {'id': tipo_material.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tipo_material_new') }}">Create new</a>
+{% endblock %}
