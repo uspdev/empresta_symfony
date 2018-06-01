@@ -19,22 +19,18 @@ class TipoMaterialRepository extends ServiceEntityRepository
         parent::__construct($registry, TipoMaterial::class);
     }
 
-//    /**
-//     * @return TipoMaterial[] Returns an array of TipoMaterial objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findLikeNome($nome)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
+        return $this
+            ->createQueryBuilder('a')
+            ->where('upper(a.nome) LIKE upper(:nome)')
+            ->setParameter('nome', "%$nome%")
+            ->orderBy('a.nome')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
+            ->execute()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?TipoMaterial

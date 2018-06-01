@@ -38,6 +38,11 @@ class TipoMaterial
         $this->materiais = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getNome();
+    }
+
     public function getId()
     {
         return $this->id;

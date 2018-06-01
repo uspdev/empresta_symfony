@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f01cbc5bb9d5f1ae10e3a718eef9f4a",
+    "content-hash": "bb16493731d2b2b6838c06238fc7f371",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1678,21 +1678,21 @@
         },
         {
             "name": "pugx/autocompleter-bundle",
-            "version": "v1.4.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PUGX/PUGXAutoCompleterBundle.git",
-                "reference": "8c3c419669ec2cb951305146f4d89dd3f92e8d08"
+                "reference": "a65d909483228cf359bf65c62863a196e615b849"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PUGX/PUGXAutoCompleterBundle/zipball/8c3c419669ec2cb951305146f4d89dd3f92e8d08",
-                "reference": "8c3c419669ec2cb951305146f4d89dd3f92e8d08",
+                "url": "https://api.github.com/repos/PUGX/PUGXAutoCompleterBundle/zipball/a65d909483228cf359bf65c62863a196e615b849",
+                "reference": "a65d909483228cf359bf65c62863a196e615b849",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "^2.5",
-                "php": ">=7.1",
+                "php": "^7.1",
                 "symfony/config": "^3.4|^4.0",
                 "symfony/dependency-injection": "^3.4|^4.0",
                 "symfony/event-dispatcher": "^3.4|^4.0",
@@ -1701,7 +1701,7 @@
             },
             "require-dev": {
                 "lexik/form-filter-bundle": "^5.0",
-                "phpunit/phpunit": "^6.4"
+                "phpunit/phpunit": "^7.0"
             },
             "suggest": {
                 "lexik/form-filter-bundle": "To use autocomplete on a filter."
@@ -1733,7 +1733,7 @@
                 "form",
                 "symfony"
             ],
-            "time": "2018-01-07T19:59:30+00:00"
+            "time": "2018-05-18T11:20:44+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -4676,12 +4676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/bootstrap-dashboard-bundle.git",
-                "reference": "91267043f1cbfb956fe29bfae5d139696429e095"
+                "reference": "c1d62a3bf2646f25342dbcb73cff73361d8308f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/bootstrap-dashboard-bundle/zipball/91267043f1cbfb956fe29bfae5d139696429e095",
-                "reference": "91267043f1cbfb956fe29bfae5d139696429e095",
+                "url": "https://api.github.com/repos/uspdev/bootstrap-dashboard-bundle/zipball/c1d62a3bf2646f25342dbcb73cff73361d8308f1",
+                "reference": "c1d62a3bf2646f25342dbcb73cff73361d8308f1",
                 "shasum": ""
             },
             "require": {
@@ -4719,7 +4719,7 @@
                 "bootstrap",
                 "dashboard"
             ],
-            "time": "2018-06-01T01:21:56+00:00"
+            "time": "2018-06-01T02:02:17+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -6167,6 +6167,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "pugx/autocompleter-bundle": 20,
         "symfony/lts": 20,
         "uspdev/bootstrap-dashboard-bundle": 20
     },

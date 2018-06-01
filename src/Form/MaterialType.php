@@ -16,7 +16,8 @@ class MaterialType extends AbstractType
         $builder
             ->add('ativo')
             ->add('codigo')
-            ->add('tipo', AutocompleteType::class, ['class' => TipoMaterial::class])
+            ->add('tipo')
+            //->add('tipo', AutocompleteType::class, ['class' => TipoMaterial::class])
         ;
     }
 

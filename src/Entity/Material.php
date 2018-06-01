@@ -32,6 +32,11 @@ class Material
      */
     private $tipo;
 
+    public function __toString()
+    {
+        return $this->getId();
+    }
+
     public function getId()
     {
         return $this->id;
