@@ -10,7 +10,6 @@
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>Prefixo</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,7 +18,6 @@
             <tr>
                 <td>{{ tipo_material.id }}</td>
                 <td>{{ tipo_material.nome }}</td>
-                <td>{{ tipo_material.prefixo }}</td>
                 <td>
                     <a href="{{ path('tipo_material_show', {'id': tipo_material.id}) }}">show</a>
                     <a href="{{ path('tipo_material_edit', {'id': tipo_material.id}) }}">edit</a>

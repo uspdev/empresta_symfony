@@ -127,7 +127,7 @@ class Emprestimo
         return $this->dataDevolucao;
     }
 
-    public function getCodpes($codpes)
+    public function getCodpes()
     {
         return $this->codpes;
     }

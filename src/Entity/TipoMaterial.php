@@ -24,11 +24,6 @@ class TipoMaterial
     private $nome;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $prefixo;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Material", mappedBy="tipo")
      */
     private $materiais;
@@ -60,17 +55,6 @@ class TipoMaterial
         return $this;
     }
 
-    public function getPrefixo(): ?int
-    {
-        return $this->prefixo;
-    }
-
-    public function setPrefixo(int $prefixo): self
-    {
-        $this->prefixo = $prefixo;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Material[]

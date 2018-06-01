@@ -24,7 +24,7 @@ class Material
     private $ativo;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $codigo;
 
@@ -46,7 +46,7 @@ class Material
 
     public function __toString()
     {
-        return $this->getId();
+        return (string)$this->getId();
     }
 
     public function getId()

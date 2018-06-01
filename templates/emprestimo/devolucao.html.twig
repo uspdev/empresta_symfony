@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Devolução</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.material,{'label': 'Código'}) }}
+
+        <button type="submit" class="btn btn-primary"> Devolver</button>
+    {{ form_end(form) }}
+
+{% endblock %}

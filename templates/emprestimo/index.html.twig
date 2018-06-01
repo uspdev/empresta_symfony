@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-xs-12 col-md-8">
+
+    <h1>Itens emprestados</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Tipo</th>
+                <th>Data do empréstimo</th>
+                <th>Pessoa</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for emprestimo in emprestimos %}
+            <tr>
+                <td>{{ emprestimo.material }}</td>
+                <td>{{ emprestimo.material.tipo }}</td>
+                <td>{% if emprestimo.dataEmprestimo %}{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}{% endif %}</td>
+
+                <td>
+                    {% if emprestimo.visitante is empty %}
+                        {{ emprestimo.codpes }}
+                    {% else %}
+                        {{ emprestimo.visitante }}
+                    {% endif %}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+</div>
+{% endblock %}

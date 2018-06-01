@@ -40,6 +40,11 @@ class Visitante
      */
     private $emprestimos;
 
+    public function __toString()
+    {
+        return $this->getNome();
+    }
+
     public function __construct()
     {
         $this->emprestimos = new ArrayCollection();
