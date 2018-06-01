@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\Emprestimo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MaterialRepository")
@@ -31,6 +33,16 @@ class Material
      * @ORM\JoinColumn(nullable=false)
      */
     private $tipo;
+
+    /** 
+     * @ORM\OneToMany(targetEntity="Emprestimo",mappedBy="material")
+     */
+    private $emprestimos;
+
+    public function __construct()
+    {
+        $this->emprestimos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -76,5 +88,28 @@ class Material
         $this->tipo = $tipo;
 
         return $this;
+    }
+
+    public function setEmprestimos($emprestimos)
+    {
+        $this->emprestimos = $emprestimos;
+        return $this;
+    }
+
+    public function getEmprestimos()
+    {
+        return $this->emprestimos;
+    }
+
+    public function addEmprestimo(Emprestimo $emprestimo)
+    {
+        $this->emprestimos[] = $emprestimo;
+
+        return $this;
+    }
+
+    public function removeEmprestimo(Emprestimo $emprestimo)
+    {
+        $this->emprestimos->removeElement($emprestimo);
     }
 }

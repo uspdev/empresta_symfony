@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\Emprestimo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VisitanteRepository")
@@ -30,6 +32,18 @@ class Visitante
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $email;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Emprestimo", mappedBy="visitante")
+     */
+    private $emprestimos;
+
+    public function __construct()
+    {
+        $this->emprestimos = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -70,5 +84,28 @@ class Visitante
         $this->email = $email;
 
         return $this;
+    }
+
+    public function setEmprestimos($emprestimos)
+    {
+        $this->emprestimos = $emprestimos;
+        return $this;
+    }
+
+    public function getEmprestimos()
+    {
+        return $this->emprestimos;
+    }
+
+    public function addEmprestimo(Emprestimo $emprestimo)
+    {
+        $this->emprestimos[] = $emprestimo;
+
+        return $this;
+    }
+
+    public function removeEmprestimo(Emprestimo $emprestimo)
+    {
+        $this->emprestimos->removeElement($emprestimo);
     }
 }
