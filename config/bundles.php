@@ -17,4 +17,5 @@ return [
     Fidry\PsyshBundle\PsyshBundle::class => ['dev' => true, 'test' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Uspdev\BootstrapDashboardBundle\UspdevBootstrapDashboardBundle::class => ['all' => true],
+    PUGX\AutocompleterBundle\PUGXAutocompleterBundle::class => ['all' => true],
 ];

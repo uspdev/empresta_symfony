@@ -131,6 +131,9 @@
     "psy/psysh": {
         "version": "v0.9.4"
     },
+    "pugx/autocompleter-bundle": {
+        "version": "v1.4.1"
+    },
     "sensio/framework-extra-bundle": {
         "version": "4.0",
         "recipe": {

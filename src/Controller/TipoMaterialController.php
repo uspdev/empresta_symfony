@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/tipo/material")
+ * @Route("/tipo_material")
  */
 class TipoMaterialController extends Controller
 {
@@ -86,5 +86,26 @@ class TipoMaterialController extends Controller
         }
 
         return $this->redirectToRoute('tipo_material_index');
+    }
+
+    /**
+     * @Route("/search", name="tipo_material_search", methods="GET|POST")
+     */
+    public function search(Request $request)
+    {
+        $q = $request->query->get('term'); // use "term" instead of "q" for jquery-ui
+        $results = $this->getDoctrine()->getRepository('App:TipoMaterial')->findLikeName($q);
+
+        return $this->render('tipo_material/search.json.twig', ['results' => $results]);
+    }
+
+    /**
+     * @Route("/get", name="tipo_material_get", methods="GET|POST")
+     */
+    public function get($id = null)
+    {
+        $tipo = $this->getDoctrine()->getRepository('App:TipoMaterial')->find($id);
+
+        return $this->json($tipo->getNome());
     }
 }

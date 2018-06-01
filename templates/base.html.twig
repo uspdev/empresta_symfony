@@ -55,5 +55,8 @@
     {{ parent() }}
 {% endblock %}
                 
-
-
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/pugxautocompleter/js/autocompleter-jqueryui.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+{% endblock %}

@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Material;
+use App\Entity\TipoMaterial;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 
 class MaterialType extends AbstractType
 {
@@ -14,7 +16,7 @@ class MaterialType extends AbstractType
         $builder
             ->add('ativo')
             ->add('codigo')
-            ->add('tipo')
+            ->add('tipo', AutocompleteType::class, ['class' => TipoMaterial::class])
         ;
     }
 
