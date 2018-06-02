@@ -2,17 +2,22 @@
 
 Sistema para empréstimo de materiais (armários, CDs, Fones etc) durante a
 permanência dos usuários na Biblioteca. O material deve ter um código 
-identificador unico que será lido com código de barra.
+identificador único que será lido com código de barra.
 
-Ações:
+Ações do grupo administrador:
 
- - Gerenciamento dos materiais que serão emprestados
+ - Gerenciar usuários do sistema
+ - Gerenciamento dos tipos de materiais que serão emprestados: armários, fones etc
+ - Gerenciamento dos materiais: criar, editar, apagar ou desativar.
+ 
+ Ações do grupo balcão:
+
+ - Devolução
+ - Empréstimo para visitante (externa à USP) - mediante cadastro prévio
  - Empréstimo para pessoa USP (dados da replicação, tabelas PESSOA e/ou CATR_CRACHA)
- - Empréstimo para pessoa visitante (externa à USP) - mediante cadastro prévio
- - Cadastro local de pessoas externas à USP
- - Listagem dos materiais emprestados e não devolvidos
- - Não permite emprestar mais que um material por pessoa
- - Ativar ou desativar material
+ - Listagem dos itens emprestados e ainda não devolvidos
+ - Listagem de empréstimos concluídos no dia
+ - Gerenciar visitantes
 
 # Deploy
 
