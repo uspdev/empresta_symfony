@@ -18,6 +18,12 @@ Ações do grupo administrador:
  - Listagem dos itens emprestados e ainda não devolvidos
  - Listagem de empréstimos concluídos no dia
  - Gerenciar visitantes
+ 
+Integração com outros serviços:
+
+ - Para trazer dados do replicado insira TRUE na variável USE_REPLICADO em .env e configure as variáveis correspondentes
+ - Para trazer a foto do wsfoto, insira TRUE na variável USE_WSFOTO em .env e configure as variáveis correspondentes
+ 
 
 # Deploy
 
@@ -27,14 +33,10 @@ Download:
     cd empresta
     composer install
 
-Aplicar esquema no banco de dados:
+Configurar .env e aplicar esquema no banco de dados:
 
     php bin/console doctrine:migrations:migrate
 
-Criar usuário *admin* com senha *admin*:
+Criar usuário *admin* e *balcao* e materiais de exemplo:
 
     php bin/console doctrine:fixtures:load
-
-Assets:
-
-    php bin/console assets:install --symlink
