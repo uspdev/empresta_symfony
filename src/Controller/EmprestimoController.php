@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Emprestimo controller.
- * @Security("is_granted('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER','ROLE_ADMIN')")
  * @Route("emprestimo")
  */
 class EmprestimoController extends Controller
@@ -95,6 +95,7 @@ class EmprestimoController extends Controller
             $nome = $pessoa ? $pessoa[0]['PESSOA_nompes'] : $cracha[0]['CATR_CRACHA_nompescra'];
 */   
             $emprestimo->setDataEmprestimo(new \DateTime());
+            $emprestimo->setCreatedBy($this->getUser());
             $em->persist($emprestimo);
             $em->flush();
 
@@ -149,7 +150,8 @@ class EmprestimoController extends Controller
                     return $this->redirectToRoute('emprestimo_pessoaexterna_new');
             }
 */
-            $emprestimo->setDataEmprestimo(new \DateTime());   
+            $emprestimo->setDataEmprestimo(new \DateTime());
+            $emprestimo->setCreatedBy($this->getUser());
             $em->persist($emprestimo);
             $em->flush();
 

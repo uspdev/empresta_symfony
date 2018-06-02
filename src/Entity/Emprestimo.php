@@ -57,6 +57,10 @@ class Emprestimo
      */
     private $codpes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $createdBy;
 
     /**
      * Get id
@@ -146,6 +150,18 @@ class Emprestimo
     public function setVisitante($visitante)
     {
         $this->visitante = $visitante;
+        return $this;
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
         return $this;
     }
 }

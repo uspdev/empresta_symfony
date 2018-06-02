@@ -42,6 +42,11 @@ class Material
      */
     private $emprestimos;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $createdBy;
+
     public function __construct()
     {
         $this->emprestimos = new \Doctrine\Common\Collections\ArrayCollection();
@@ -114,5 +119,17 @@ class Material
     public function removeEmprestimo(Emprestimo $emprestimo)
     {
         $this->emprestimos->removeElement($emprestimo);
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
     }
 }

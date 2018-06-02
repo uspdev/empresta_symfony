@@ -28,6 +28,11 @@ class TipoMaterial
      */
     private $materiais;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $createdBy;
+
     public function __construct()
     {
         $this->materiais = new ArrayCollection();
@@ -83,6 +88,17 @@ class TipoMaterial
                 $materiai->setTipo(null);
             }
         }
+
+        return $this;
+    }
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

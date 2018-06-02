@@ -79,7 +79,7 @@ class User implements UserInterface
 
     public function setRoles($roles)
     {
-        $this->password = $password;
+        $this->roles = $roles;
 
         return $this;
     }

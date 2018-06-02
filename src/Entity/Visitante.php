@@ -40,6 +40,11 @@ class Visitante
      */
     private $emprestimos;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $createdBy;
+
     public function __toString()
     {
         return $this->getNome();
@@ -87,6 +92,18 @@ class Visitante
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

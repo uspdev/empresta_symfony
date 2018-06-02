@@ -9,8 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
+ * @Security("is_granted('ROLE_ADMIN')")
  * @Route("/material")
  */
 class MaterialController extends Controller
@@ -34,6 +36,7 @@ class MaterialController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $material->setCreatedBy($this->getUser());
             $em->persist($material);
             $em->flush();
 

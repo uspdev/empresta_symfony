@@ -9,8 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
+ * @Security("is_granted('ROLE_USER','ROLE_ADMIN')")
  * @Route("/visitante")
  */
 class VisitanteController extends Controller
@@ -34,6 +36,7 @@ class VisitanteController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $visitante->setCreatedBy($this->getUser());
             $em->persist($visitante);
             $em->flush();
 
