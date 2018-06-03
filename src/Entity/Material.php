@@ -50,6 +50,7 @@ class Material
     public function __construct()
     {
         $this->emprestimos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ativo = true;
     }
 
     public function __toString()

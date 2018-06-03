@@ -12,13 +12,18 @@
                 <td>{{ material.ativo ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>Codigo</th>
+                <th>Código</th>
                 <td>{{ material.codigo }}</td>
+            </tr>
+            <tr>
+                <th>Código de barra</th>
+                <td><img src="data:image/png;base64,{{ barcode }}"></td>
             </tr>
         </tbody>
     </table>
     <a href="{{ path('material_index') }}" class='btn btn-success' >Voltar</a>
     <a href="{{ path('material_edit', {'id': material.id}) }}" class='btn btn-success'>Editar</a>
+    
 
    <hr>
    <h2>Empréstimos concluídos</h2>

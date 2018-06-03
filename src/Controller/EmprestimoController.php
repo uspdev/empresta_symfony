@@ -59,6 +59,12 @@ class EmprestimoController extends Controller
                                 $emprestimo->getMaterial()->getCodigo()));
                 return $this->redirectToRoute('emprestimo_usp');
             }
+            if(!$emprestimo->getMaterial()->getAtivo()){
+                $this->addFlash('danger', sprintf('Erro: Item %s não pode ser emprestado no momento, pois está desativado.',
+                                $emprestimo->getMaterial()->getCodigo()));
+                return $this->redirectToRoute('emprestimo_usp');
+            }
+
 
 
             // Verifica se usuário existe na tabela pessoa
@@ -121,16 +127,20 @@ class EmprestimoController extends Controller
         $form = $this->createForm('App\Form\EmprestimoVisitanteType', $emprestimo);
         $form->handleRequest($request);
 
-
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             if(!$this->estaDisponivel($emprestimo)){
                 $this->addFlash('danger', sprintf('Erro: Item %s já está emprestado para outra pessoa!',
                                 $emprestimo->getMaterial()->getCodigo()));
-                return $this->redirectToRoute('emprestimo_usp');
+                return $this->redirectToRoute('emprestimo_visitante');
             }
-           
+            if(!$emprestimo->getMaterial()->getAtivo()){
+                $this->addFlash('danger', sprintf('Erro: Item %s não pode ser emprestado no momento, pois está desativado.',
+                                $emprestimo->getMaterial()->getCodigo()));
+                return $this->redirectToRoute('emprestimo_visitante');
+            }
+
+          
 /*
 
             // Verificar se a pessoa já não possui armário emprestado

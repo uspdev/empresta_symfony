@@ -56,7 +56,6 @@ class MaterialController extends Controller
     {
         // Empréstimos realizados
         $em = $this->getDoctrine()->getManager();
-
         $repository = $em->getRepository('App:Emprestimo');
         $query = $repository->createQueryBuilder('a')
             ->innerJoin('a.material', 'g')
@@ -72,10 +71,15 @@ class MaterialController extends Controller
             10/*limit per page*/
         );
 
+        // barcode
+        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+        $barcode = base64_encode($generator->getBarcode($material->getCodigo(), $generator::TYPE_CODE_39));
+
         // parameters to template
         return $this->render('material/show.html.twig', [
             'material'    => $material,
-            'pagination' => $pagination,
+            'barcode'     => $barcode,
+            'pagination'  => $pagination,
         ]);
     }
 
