@@ -16,7 +16,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Emprestimo controller.
  * @Security("is_granted('ROLE_USER','ROLE_ADMIN')")
- * @Route("emprestimo")
  */
 class EmprestimoController extends Controller
 {
@@ -41,7 +40,7 @@ class EmprestimoController extends Controller
     /**
      * Creates a new emprestimo entity.
      *
-     * @Route("/usp", name="emprestimo_usp", methods="GET|POST")
+     * @Route("/emprestimo/usp", name="emprestimo_usp", methods="GET|POST")
      */
     public function newActionUsp(Request $request)
     {
@@ -118,7 +117,7 @@ class EmprestimoController extends Controller
     /**
      * Creates a new emprestimo entity.
      *
-     * @Route("/visitante", name="emprestimo_visitante", methods="GET|POST")
+     * @Route("/emprestimo/visitante", name="emprestimo_visitante", methods="GET|POST")
      */
     public function newActionVisitante(Request $request)
     {
@@ -178,7 +177,7 @@ class EmprestimoController extends Controller
 
 
     /**
-     * @Route("/devolucao", name="emprestimo_devolucao")     
+     * @Route("/emprestimo/devolucao", name="emprestimo_devolucao")     
      * @Method({"GET", "POST"})
      */
     public function devolucaoAction(Request $request)
@@ -214,42 +213,6 @@ class EmprestimoController extends Controller
             'form' => $form->createView(),
         ));
 
-    }
-
-    /**
-     * Deletes a emprestimo entity.
-     *
-     * @Route("/{id}/delete", name="emprestimo_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Emprestimo $emprestimo)
-    {
-        $form = $this->createDeleteForm($emprestimo);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($emprestimo);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('emprestimo_index');
-    }
-
-    /**
-     * Creates a form to delete a emprestimo entity.
-     *
-     * @param Emprestimo $emprestimo The emprestimo entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Emprestimo $emprestimo)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('emprestimo_delete', array('id' => $emprestimo->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
     }
 
    /********************************** Utils Functions *****************************************/
