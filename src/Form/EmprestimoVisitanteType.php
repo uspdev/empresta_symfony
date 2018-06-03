@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Form\DataTransformer\MaterialTransformer;
+use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
+use App\Entity\Visitante;
 
 class EmprestimoVisitanteType extends AbstractType
 {
@@ -25,7 +27,7 @@ class EmprestimoVisitanteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('visitante');
+        $builder->add('visitante', AutocompleteType::class, ['class' => Visitante::class]);
 
         $builder->add('material',TextType::class,[
             'required'  => true,

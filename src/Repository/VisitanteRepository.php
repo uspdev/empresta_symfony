@@ -19,32 +19,29 @@ class VisitanteRepository extends ServiceEntityRepository
         parent::__construct($registry, Visitante::class);
     }
 
-//    /**
-//     * @return Visitante[] Returns an array of Visitante objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findLike($nome)
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
+        return $this
+            ->createQueryBuilder('a')
+            ->where('upper(a.nome) LIKE upper(:nome)')
+            ->setParameter('nome', "%$nome%")
+            ->orderBy('a.nome')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
+            ->execute()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Visitante
+    public function findAll()
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->findBy(array(), array('nome' => 'ASC'));
     }
-    */
+
+    public function add(Visitante $visitante, $flush = true)
+    {
+        $this->getEntityManager()->persist($visitante);
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
 }

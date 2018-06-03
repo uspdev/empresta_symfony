@@ -17,6 +17,29 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class VisitanteController extends Controller
 {
+
+    /**
+     * @Route("/search", name="visitante_search", methods="GET", defaults={"_format"="json"})
+     */
+    public function search(VisitanteRepository $visitanteRepository, Request $request): Response
+    {
+        $qs = $request->query->get('q', $request->query->get('term', ''));
+        $visitantes = $visitanteRepository->findLike($qs);
+
+        return $this->render('visitante/search.json.twig', ['visitantes' => $visitantes]);
+    }
+
+    /**
+     * @Route("/get/{id}", name="visitante_get", methods="GET", defaults={"_format"="json"})
+     */
+    public function getAction($id = null, VisitanteRepository $visitanteRepository): Response
+    {
+        if (null === $visitante = $visitanteRepository->find($id)) {
+            throw $this->createNotFoundException();
+        }
+        return $this->json($visitante->getNome());
+    }
+
     /**
      * @Route("/", name="visitante_index", methods="GET")
      */
@@ -28,7 +51,7 @@ class VisitanteController extends Controller
     /**
      * @Route("/new", name="visitante_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+/*    public function new(Request $request): Response
     {
         $visitante = new Visitante();
         $form = $this->createForm(VisitanteType::class, $visitante);
@@ -47,6 +70,31 @@ class VisitanteController extends Controller
             'visitante' => $visitante,
             'form' => $form->createView(),
         ]);
+    }
+*/
+
+    /**
+     * @Route("/new", name="visitante_new", methods="GET|POST|PUT")
+     */
+    public function new(Request $request, VisitanteRepository $visitanteRepository): Response
+    {
+        $visitante = new Visitante();
+        $form = $this->createForm('App\Form\VisitanteType', $visitante, [
+            'method' => 'PUT',
+            'action' => $this->generateUrl('visitante_new'),
+        ]);
+        if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+            $visitanteRepository->add($visitante);
+            if ($request->isXmlHttpRequest()) {
+                return $this->json(['id' => $visitante->getId(), 'name' => $visitante->getNomel(), 'type' => 'visitante']);
+            } else {
+                $this->addFlash('success', 'Visitante Cadastrado!');
+
+                return $this->redirectToRoute('visitante_index');
+            }
+        }
+
+        return $this->render('visitante/new.html.twig', ['form' => $form->createView()]);
     }
 
     /**

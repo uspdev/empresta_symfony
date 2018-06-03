@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends app.request.get('jqui') ? 'base_jqui.html.twig' : 'base.html.twig' %}
 
 {% block body %}
     <br>
@@ -11,6 +11,10 @@
 
         <button type="submit" class="btn btn-primary"> Emprestar </button>
     {{ form_end(form) }}
+
+    <a href="{{ path('visitante_search') }}" id="url-list" class="hidden"></a>
+    <a href="{{ path('visitante_get') }}" id ="url-get" class="hidden"></a>
+    <a href="{{ path('visitante_new') }}" id ="url-new" class="hidden"></a>
 
 {% endblock %}
 

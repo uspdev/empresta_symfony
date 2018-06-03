@@ -1,0 +1,4 @@
+[{% for visitante in visitantes -%}
+    {{ {id: visitante.id, text: visitante.__toString}|json_encode|raw }}
+    {%- if not loop.last %},{% endif -%}
+{%- endfor %}]
