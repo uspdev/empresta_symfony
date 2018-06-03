@@ -3,11 +3,41 @@
 {% block title %}TipoMaterial{% endblock %}
 
 {% block body %}
-    <h1>Categoria: {{ tipo_material.nome }} </h1>
+    <h1>{{ tipo_material.nome }} </h1>
 
+{#
     <a href="{{ path('tipo_material_index') }}">back to list</a>
-
     <a href="{{ path('tipo_material_edit', {'id': tipo_material.id}) }}">edit</a>
-
     {{ include('tipo_material/_delete_form.html.twig') }}
+#}
+   
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Tipo</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for material in tipo_material.materiais %}
+            <tr>
+                <td>{{ material.codigo }}</td>
+                <td>{{ material.tipo }}</td>
+                <td>{{ material.ativo ? 'Sim' : 'Não' }}</td>
+                <td>
+                    <a href="{{ path('material_show', {'id': material.id}) }}"><span class="oi oi-eye"></span></a>
+                    <a href="{{ path('material_edit', {'id': material.id}) }}"><span class="oi oi-pencil"></span></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}

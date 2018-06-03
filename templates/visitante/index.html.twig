@@ -1,30 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Visitante index{% endblock %}
+{% block title %}Visitantes{% endblock %}
 
 {% block body %}
-    <h1>Visitante index</h1>
+    <h1>Visitantes</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Email</th>
-                <th>actions</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
         {% for visitante in visitantes %}
             <tr>
-                <td>{{ visitante.id }}</td>
                 <td>{{ visitante.nome }}</td>
                 <td>{{ visitante.telefone }}</td>
                 <td>{{ visitante.email }}</td>
                 <td>
-                    <a href="{{ path('visitante_show', {'id': visitante.id}) }}">show</a>
-                    <a href="{{ path('visitante_edit', {'id': visitante.id}) }}">edit</a>
+                    <a href="{{ path('visitante_show', {'id': visitante.id}) }}"><span class="oi oi-eye"></span></a>
+                    <a href="{{ path('visitante_edit', {'id': visitante.id}) }}"><span class="oi oi-pencil"></span></a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('visitante_new') }}">Create new</a>
+    <a href="{{ path('visitante_new') }}" class="btn btn-success">Novo</a>
 {% endblock %}

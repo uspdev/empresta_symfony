@@ -77,20 +77,20 @@
     <li class="nav-item">
         <a class="nav-link active" href="{{ path('user_index') }}">
             <span data-feather="home"></span>
-            Usuários Administrativos
+            Usuários do sistema
             <span class="sr-only">(current)</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href=" {{ path('material_index')}}">
             <span data-feather="file"></span>
-            Gerenciar Material
+            Materiais
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href=" {{ path('tipo_material_index')}}">
             <span data-feather="file"></span>
-           Categoria de Materiais
+           Categorias
         </a>
     </li>
 </ul>
@@ -125,3 +125,12 @@
     <script src="{{ asset('bundles/pugxautocompleter/js/autocompleter-jqueryui.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+
+{% endblock %}
+
+

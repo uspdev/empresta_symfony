@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TipoMaterial index{% endblock %}
+{% block title %}Categoria dos Materiais de Empréstimo{% endblock %}
 
 {% block body %}
     <h1>Categorias dos itens de empréstimo</h1>
@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>actions</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -17,8 +17,8 @@
             <tr>
                 <td>{{ tipo_material.nome }}</td>
                 <td>
-                    <a href="{{ path('tipo_material_show', {'id': tipo_material.id}) }}">show</a>
-                    <a href="{{ path('tipo_material_edit', {'id': tipo_material.id}) }}">edit</a>
+                    <a href="{{ path('tipo_material_show', {'id': tipo_material.id}) }}"><span class="oi oi-eye"></span></a>
+                    <a href="{{ path('tipo_material_edit', {'id': tipo_material.id}) }}"><span class="oi oi-pencil"></span></a>
                 </td>
             </tr>
         {% else %}
@@ -29,5 +29,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('tipo_material_new') }}">Create new</a>
+    <a href="{{ path('tipo_material_new') }}" class="btn btn-success">Nova categoria</a>
 {% endblock %}

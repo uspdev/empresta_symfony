@@ -17,8 +17,8 @@
             <tr>
                 <td>{{ user.username }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}"><span class="oi oi-eye"></span></a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}"><span class="oi oi-pencil"></span></a>
                 </td>
             </tr>
         {% else %}

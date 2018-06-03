@@ -11,7 +11,7 @@
                 <th>Código</th>
                 <th>Tipo</th>
                 <th>Ativo</th>
-                <th>actions</th>
+                <th>Acões</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +21,8 @@
                 <td>{{ material.tipo }}</td>
                 <td>{{ material.ativo ? 'Sim' : 'Não' }}</td>
                 <td>
-                    <a href="{{ path('material_show', {'id': material.id}) }}">show</a>
-                    <a href="{{ path('material_edit', {'id': material.id}) }}">edit</a>
+                    <a href="{{ path('material_show', {'id': material.id}) }}"><span class="oi oi-eye"></span></a>
+                    <a href="{{ path('material_edit', {'id': material.id}) }}"><span class="oi oi-pencil"></span></a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('material_new') }}">Create new</a>
+    <a href="{{ path('material_new') }}" class="btn btn-success">Novo item</a>
 {% endblock %}
