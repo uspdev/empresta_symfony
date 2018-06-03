@@ -21,7 +21,12 @@ Ações do grupo administrador:
  
 Integração com outros serviços:
 
- - Para trazer dados do replicado insira TRUE na variável USE_REPLICADO em .env e configure as variáveis correspondentes
+ - Para trazer dados do replicado:
+
+Neste caso é necessário insirir TRUE na variável USE_REPLICADO no arquivo .env e configurar as variáveis correspondentes, além de baixar a estrutura das tabelas:
+  
+    git clone git@git.uspdigital.usp.br:uspdev/replicado_queries vendor/uspdev/replicado/src/replicado_queries
+    
  - Para trazer a foto do wsfoto, insira TRUE na variável USE_WSFOTO em .env e configure as variáveis correspondentes
  
 
