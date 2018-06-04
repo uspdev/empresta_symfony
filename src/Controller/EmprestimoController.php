@@ -104,7 +104,9 @@ class EmprestimoController extends Controller
             $em->persist($emprestimo);
             $em->flush();
 
-            return $this->redirectToRoute('index', array('id' => $emprestimo->getId()));
+            return $this->render('emprestimo/show.html.twig', array(
+                'emprestimo' => $emprestimo,
+            ));
         }
      
         return $this->render('emprestimo/usp.html.twig', array(
@@ -164,8 +166,9 @@ class EmprestimoController extends Controller
             $em->persist($emprestimo);
             $em->flush();
 
-            //return $this->redirectToRoute('emprestimo_show', array('id' => $emprestimo->getId()));
-            return $this->redirectToRoute('index');
+            return $this->render('emprestimo/show.html.twig', array(
+                'emprestimo' => $emprestimo,
+            ));
         }
 
         

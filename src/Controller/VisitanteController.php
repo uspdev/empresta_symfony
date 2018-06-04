@@ -79,6 +79,7 @@ class VisitanteController extends Controller
     public function new(Request $request, VisitanteRepository $visitanteRepository): Response
     {
         $visitante = new Visitante();
+        
         $form = $this->createForm('App\Form\VisitanteType', $visitante, [
             'method' => 'PUT',
             'action' => $this->generateUrl('visitante_new'),
@@ -86,7 +87,7 @@ class VisitanteController extends Controller
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             $visitanteRepository->add($visitante);
             if ($request->isXmlHttpRequest()) {
-                return $this->json(['id' => $visitante->getId(), 'name' => $visitante->getNomel(), 'type' => 'visitante']);
+                return $this->json(['id' => $visitante->getId(), 'name' => $visitante->getNome(), 'type' => 'visitante']);
             } else {
                 $this->addFlash('success', 'Visitante Cadastrado!');
 

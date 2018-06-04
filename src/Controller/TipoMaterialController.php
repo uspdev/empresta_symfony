@@ -18,27 +18,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class TipoMaterialController extends Controller
 {
     /**
-     * @Route("/search", name="tipo_material_search", methods="GET", defaults={"_format"="json"})
-     */
-/*    public function search(Request $request)
-    {
-        $q = $request->query->get('term'); // use "term" instead of "q" for jquery-ui
-        $results = $this->getDoctrine()->getRepository('App:TipoMaterial')->findLikeNome($q);
-
-        return $this->render('tipo_material/search.json.twig', ['results' => $results]);
-    }
-*/
-    /**
-     * @Route("/get/{id}", name="tipo_material_get", methods="GET|POST", defaults={"_format"="json"})
-     */
-/*    public function get($id = null)
-    {
-        $tipo = $this->getDoctrine()->getRepository('App:TipoMaterial')->find($id);
-
-        return $this->json($tipo->getNome());
-    }
-*/
-    /**
      * @Route("/", name="tipo_material_index", methods="GET")
      */
     public function index(TipoMaterialRepository $tipoMaterialRepository): Response
