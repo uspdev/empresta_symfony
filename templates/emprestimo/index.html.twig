@@ -14,6 +14,7 @@
                 <th>Tipo</th>
                 <th>Data do empréstimo</th>
                 <th>Pessoa</th>
+                <th>Ver</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +26,7 @@
 
                 <td>
                     {% if emprestimo.visitante is empty %}
-                        {% if replicado is not null %}
+                        {% if replicado is not empty %}
                             {{ emprestimo.codpes }} - {{ replicado[emprestimo.codpes] }}
                         {% else %}
                             {{ emprestimo.codpes }}
@@ -34,6 +35,7 @@
                         {{ emprestimo.visitante }}
                     {% endif %}
                 </td>
+                <td> <a href="{{ path('emprestimo_show', {'id': emprestimo.id}) }}"><span class="oi oi-eye"></span></a></td>
 
             </tr>
         {% endfor %}

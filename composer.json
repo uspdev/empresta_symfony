@@ -1,6 +1,7 @@
 {
     "type": "project",
     "license": "proprietary",
+    "minimum-stability": "dev",
     "require": {
         "php": "^7.1.3",
         "ext-iconv": "*",
@@ -27,7 +28,8 @@
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "^4.0",
         "uspdev/bootstrap-dashboard-bundle": "dev-master",
-        "uspdev/replicado": "dev-master"
+        "uspdev/replicado": "dev-master",
+        "uspdev/wsfoto": "dev-master"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",

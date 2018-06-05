@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+use Uspdev\Wsfoto;
 use Uspdev\Replicado\Pessoa;
 
 /**
@@ -43,15 +44,7 @@ class EmprestimoController extends Controller
                 }
             }
         }
-       
-             
-
-/*          if(!$pessoa & !$cracha){
-                $this->addFlash('danger', sprintf('Armário não emprestado! Pessoa %s não encontrada na USP',$emprestimo->getPessoaUsp()));
-                return $this->redirectToRoute('emprestimo_pessoausp_new');
-            }
-*/
-
+              
 
 /*
             // Verificar se a pessoa já não possui armário emprestado
@@ -105,6 +98,24 @@ class EmprestimoController extends Controller
                 return $this->redirectToRoute('emprestimo_usp');
             }
 
+            // Replicado
+            $replicado = [];
+            if( getenv('USAR_REPLICADO') == 'true') {         
+                $codpes = $emprestimo->getCodpes();
+                if(!empty($codpes)) {
+                    $replicado[$codpes] = $this->pessoaUSP($codpes);
+                }
+            }
+
+            // Wsfoto
+            $wsfoto = '';
+            if( getenv('USAR_WSFOTO') == 'true') {         
+                $codpes = $emprestimo->getCodpes();
+                if(!empty($codpes)) {
+                    $wsfoto = Wsfoto::obter($codpes);
+                }
+            }
+
             $emprestimo->setDataEmprestimo(new \DateTime());
             $emprestimo->setCreatedBy($this->getUser());
             $em->persist($emprestimo);
@@ -112,12 +123,13 @@ class EmprestimoController extends Controller
 
             return $this->render('emprestimo/show.html.twig', array(
                 'emprestimo' => $emprestimo,
+                'replicado' => $replicado,
+                'wsfoto' => $wsfoto,
             ));
         }
      
         return $this->render('emprestimo/usp.html.twig', array(
             'emprestimo' => $emprestimo,
-//            'armarios_indisponiveis' => $armarios_indisponiveis,
             'form' => $form->createView(),
         ));
     }
@@ -222,6 +234,36 @@ class EmprestimoController extends Controller
             'form' => $form->createView(),
         ));
 
+    }
+
+    /**
+     * @Route("/emprestimo/{id}", name="emprestimo_show", methods="GET")
+     */
+    public function show(Emprestimo $emprestimo): Response
+    {
+        // Replicado
+        $replicado = [];
+        if( getenv('USAR_REPLICADO') == 'true') {         
+            $codpes = $emprestimo->getCodpes();
+            if(!empty($codpes)) {
+                $replicado[$codpes] = $this->pessoaUSP($codpes);
+            }
+        }
+
+        // Wsfoto
+        $wsfoto = '';
+        if( getenv('USAR_WSFOTO') == 'true') {         
+            $codpes = $emprestimo->getCodpes();
+            if(!empty($codpes)) {
+                $wsfoto = Wsfoto::obter($codpes);
+            }
+        }
+
+        return $this->render('emprestimo/show.html.twig', [
+            'emprestimo' => $emprestimo,
+            'replicado' => $replicado,
+            'wsfoto' => $wsfoto,
+        ]);
     }
 
    /********************************** Utils Functions *****************************************/

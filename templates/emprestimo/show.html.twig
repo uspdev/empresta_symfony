@@ -4,14 +4,42 @@
 
 {% block body %}
     {{ parent() }}
-    <h1>Empréstimo Realizado</h1>
+    <h2>Dados do Empréstimo: {{ emprestimo.material.codigo }}</b></h2>
+
+    {% if wsfoto is not empty %}
+        <div class="column"><img src="data:image/jpeg;base64,{{ wsfoto }}"></div>
+        <hr>
+    {% endif %}
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ emprestimo.id }}</td>
+                <th>Código</th>
+                <td>{{ emprestimo.material.codigo }}</td>
             </tr>
+            <tr>
+                <th>Tipo</th>
+                <td>{{ emprestimo.material.tipo }}</td>
+            </tr>
+            <tr>
+                <th>Data do Empréstimo</th>
+                <td>{% if emprestimo.dataEmprestimo %}{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Pessoa</th>
+                <td>
+                    {% if emprestimo.visitante is empty %}
+                        {% if replicado is not empty %}
+                            {{ emprestimo.codpes }} - {{ replicado[emprestimo.codpes] }}
+                        {% else %}
+                            {{ emprestimo.codpes }}
+                        {% endif %}
+                    {% else %}
+                        {{ emprestimo.visitante }}
+                    {% endif %}
+                </td>
+            </tr>
+
         </tbody>
     </table>
 
