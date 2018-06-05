@@ -8,6 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
 
 class UserType extends AbstractType
 {
@@ -16,10 +19,20 @@ class UserType extends AbstractType
         $builder
             ->add('username')
             ->add('password',PasswordType::class,[
+                'help' => 'Deixe em branco para não alterar a senha',
                 'required'   => false,
             ])
         ;
-        $builder->add('roles');
+
+        $builder->add('roles', ChoiceType::class, array(
+                       'multiple' => true,
+                       'expanded' => true,
+                       'choices' => array(
+                            'Balcão' => 'ROLE_USER',
+                            'Administrador do Sistema' => 'ROLE_ADMIN',
+                        )
+                    ));
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
