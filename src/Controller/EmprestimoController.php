@@ -252,7 +252,15 @@ class EmprestimoController extends Controller
         }
         else { 
             if( getenv('USAR_TABELA_CRACHA') == 'true') {
-                return Pessoa::cracha($codpes)['nompescra'];
+                if(!empty(Pessoa::cracha($codpes)['nompescra'])){
+                    return Pessoa::cracha($codpes)['nompescra'];
+                }
+                else {
+                    return 'Número USP não encontrado nos sistemas USP';
+                }
+            }
+            else {
+                return 'Número USP não encontrado nos sistemas USP';
             }
         }
     }
