@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+use Uspdev\Replicado\Pessoa;
+
 /**
  * Emprestimo controller.
  * @Security("is_granted('ROLE_USER','ROLE_ADMIN')")
@@ -22,8 +24,7 @@ class EmprestimoController extends Controller
     /**
      * Lists all emprestimo entities.
      *
-     * @Route("/", name="emprestimo_index")
-     * @Method("GET")
+     * @Route("/", name="emprestimo_index", methods="GET")
      */
     public function indexAction()
     {
@@ -32,45 +33,18 @@ class EmprestimoController extends Controller
         // Mostrar apenas os não devolvidos: 'dataDevolucao'=>null
         $emprestimos = $em->getRepository('App:Emprestimo')->findby(['dataDevolucao'=>null],array('material' => 'ASC'));
 
-        return $this->render('emprestimo/index.html.twig', array(
-            'emprestimos' => $emprestimos,
-        ));
-    }
-
-    /**
-     * Creates a new emprestimo entity.
-     *
-     * @Route("/emprestimo/usp", name="emprestimo_usp", methods="GET|POST")
-     */
-    public function newActionUsp(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $emprestimo = new Emprestimo();
-
-        $form = $this->createForm('App\Form\EmprestimoUspType', $emprestimo);
-        $form->handleRequest($request);
-
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            if(!$this->estaDisponivel($emprestimo)){
-                $this->addFlash('danger', sprintf('Erro: Item %s já está emprestado para outra pessoa!',
-                                $emprestimo->getMaterial()->getCodigo()));
-                return $this->redirectToRoute('emprestimo_usp');
+        // Replicado
+        $replicado = [];
+        if(getenv('USAR_REPLICADO')== 'true') {         
+            foreach($emprestimos as $emprestimo) {
+                $codpes = $emprestimo->getCodpes();
+                if(!empty($codpes)) {
+                    $replicado[$codpes] = $this->pessoaUSP($codpes);
+                }
             }
-            if(!$emprestimo->getMaterial()->getAtivo()){
-                $this->addFlash('danger', sprintf('Erro: Item %s não pode ser emprestado no momento, pois está desativado.',
-                                $emprestimo->getMaterial()->getCodigo()));
-                return $this->redirectToRoute('emprestimo_usp');
-            }
-
-
-
-            // Verifica se usuário existe na tabela pessoa
- //           $pessoa = $this->get('Fflch\Replicado\Pessoa')->pessoaByCodpes($emprestimo->getPessoaUsp());
-
-            // Verifica se usuário existe na tabela cracha
-//            $cracha = $this->get('Fflch\Replicado\Pessoa')->cracha($emprestimo->getPessoaUsp());
+        }
+       
+             
 
 /*          if(!$pessoa & !$cracha){
                 $this->addFlash('danger', sprintf('Armário não emprestado! Pessoa %s não encontrada na USP',$emprestimo->getPessoaUsp()));
@@ -99,6 +73,38 @@ class EmprestimoController extends Controller
             // Quando a pessoa não tem vínculo nenhum com a FFLCH, pegar nome da tabela CATR_CRACHA
             $nome = $pessoa ? $pessoa[0]['PESSOA_nompes'] : $cracha[0]['CATR_CRACHA_nompescra'];
 */   
+
+        return $this->render('emprestimo/index.html.twig', array(
+            'emprestimos' => $emprestimos,
+            'replicado' => $replicado,
+        ));
+    }
+
+    /**
+     * Creates a new emprestimo entity.
+     *
+     * @Route("/emprestimo/usp", name="emprestimo_usp", methods="GET|POST")
+     */
+    public function newActionUsp(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $emprestimo = new Emprestimo();
+
+        $form = $this->createForm('App\Form\EmprestimoUspType', $emprestimo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if(!$this->estaDisponivel($emprestimo)){
+                $this->addFlash('danger', sprintf('Erro: Item %s já está emprestado para outra pessoa!',
+                                $emprestimo->getMaterial()->getCodigo()));
+                return $this->redirectToRoute('emprestimo_usp');
+            }
+            if(!$emprestimo->getMaterial()->getAtivo()){
+                $this->addFlash('danger', sprintf('Erro: Item %s não pode ser emprestado no momento, pois está desativado.',
+                                $emprestimo->getMaterial()->getCodigo()));
+                return $this->redirectToRoute('emprestimo_usp');
+            }
+
             $emprestimo->setDataEmprestimo(new \DateTime());
             $emprestimo->setCreatedBy($this->getUser());
             $em->persist($emprestimo);
@@ -237,5 +243,17 @@ class EmprestimoController extends Controller
             }
         }
         return true;
+    }
+
+    public function pessoaUSP($codpes)
+    {
+        if(!empty(Pessoa::dump($codpes))) {
+            return Pessoa::dump($codpes)['nompes'] .' - '. Pessoa::email($codpes);
+        }
+        else { 
+            if( getenv('USAR_TABELA_CRACHA') == 'true') {
+                return Pessoa::cracha($codpes)['nompescra'];
+            }
+        }
     }
 }

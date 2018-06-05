@@ -4,6 +4,8 @@ Sistema para empréstimo de materiais (armários, CDs, Fones etc) durante a
 permanência dos usuários na Biblioteca. O material deve ter um código 
 identificador único que será lido com código de barra.
 
+## Features 
+
 Ações do grupo administrador:
 
  - Gerenciar usuários do sistema
@@ -18,17 +20,22 @@ Ações do grupo administrador:
  - Listagem dos itens emprestados e ainda não devolvidos
  - Listagem de empréstimos concluídos no dia
  - Gerenciar visitantes
+ - Impressão dos códigos de barras
  
-Integração com outros serviços:
+## Integração com outros serviços:
 
- - Para trazer dados do replicado:
+### Replicado
 
-Neste caso é necessário insirir TRUE na variável USE_REPLICADO no arquivo .env e configurar as variáveis correspondentes, além de baixar a estrutura das tabelas:
+ - Inserir *true* na variável USAR_REPLICADO no arquivo .env
+ - Configurar as variáveis correspondentes
+ - baixar a estrutura das tabelas:
   
     git clone git@git.uspdigital.usp.br:uspdev/replicado_queries vendor/uspdev/replicado/src/replicado_queries
     
- - Para trazer a foto do wsfoto, insira TRUE na variável USE_WSFOTO em .env e configure as variáveis correspondentes
- 
+### WSfoto
+
+ - Inserir *true* na variável USAR_WSFOTO em .env 
+ - Configurar as variáveis correspondentes
 
 # Deploy
 

@@ -73,7 +73,8 @@ class MaterialController extends Controller
 
         // barcode
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-        $barcode = base64_encode($generator->getBarcode($material->getCodigo(), $generator::TYPE_CODE_39));
+        //$barcode = base64_encode($generator->getBarcode($material->getCodigo(), $generator::TYPE_CODE_39));
+        $barcode = base64_encode($generator->getBarcode($material->getCodigo(), $generator::TYPE_CODE_128));
 
         // parameters to template
         return $this->render('material/show.html.twig', [

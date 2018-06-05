@@ -26,7 +26,8 @@
         "symfony/web-link": "^4.0",
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "^4.0",
-        "uspdev/bootstrap-dashboard-bundle": "dev-master"
+        "uspdev/bootstrap-dashboard-bundle": "dev-master",
+        "uspdev/replicado": "dev-master"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",

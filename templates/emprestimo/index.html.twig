@@ -2,6 +2,7 @@
 
 {% block body %}
 <div class="row">
+
     <div class="col-xs-12 col-md-8">
 
     <h1>Itens emprestados</h1>
@@ -24,7 +25,11 @@
 
                 <td>
                     {% if emprestimo.visitante is empty %}
-                        {{ emprestimo.codpes }}
+                        {% if replicado is not null %}
+                            {{ emprestimo.codpes }} - {{ replicado[emprestimo.codpes] }}
+                        {% else %}
+                            {{ emprestimo.codpes }}
+                        {% endif %}
                     {% else %}
                         {{ emprestimo.visitante }}
                     {% endif %}
