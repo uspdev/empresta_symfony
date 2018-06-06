@@ -18,20 +18,22 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $user1 = new User();
-        $encoded = $this->encoder->encodePassword($user1, 'admin');
-        $user1->setPassword($encoded);
-        $user1->setUsername('admin');
-        $user1->setRoles(['ROLE_ADMIN','ROLE_USER']);
-        $manager->persist($user1);
+        // admin user
+        $admin = new User();
+        $encoded = $this->encoder->encodePassword($admin, 'admin');
+        $admin->setPassword($encoded);
+        $admin->setUsername('admin');
+        $admin->setRoles(['ROLE_ADMIN','ROLE_USER']);
+        $manager->persist($admin);
         $manager->flush();
 
-        $user2 = new User();
-        $encoded = $this->encoder->encodePassword($user2, 'balcao');
-        $user2->setPassword($encoded);
-        $user2->setUsername('balcao');
-        $user2->setRoles(['ROLE_USER']);
-        $manager->persist($user2);
+        // balcao user
+        $balcao = new User();
+        $encoded = $this->encoder->encodePassword($balcao, 'balcao');
+        $balcao->setPassword($encoded);
+        $balcao->setUsername('balcao');
+        $balcao->setRoles(['ROLE_USER']);
+        $manager->persist($balcao);
         $manager->flush();
     }
 }
