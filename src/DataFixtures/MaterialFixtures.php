@@ -4,33 +4,29 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use App\DataFixtures\TipoMaterialFixtures;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-use App\Entity\TipoMaterial;
 use App\Entity\Material;
 
-class TipoMaterialFixtures extends Fixture
+class MaterialFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $tipo = new TipoMaterial();
-        $tipo->setNome('Armário');
-        $manager->persist($tipo);
-
-        $manager->flush();
-
-        $this->addReference(self::TIPOMATERIAL_REFERENCE, $tipo);
+        for($i=1; $i<250; $i++) {
+            $material = new Material();
+            $material->setAtivo(True);
+            $material->setCodigo($i);
+            $material->setTipo($this->getReference(TipoMaterialFixtures::TIPOMATERIAL_REFERENCE));
+            $manager->persist($material);
+            $manager->flush();
+        }
     }
-}
 
-class MaterialFixtures extends Fixture
-{
-    public function load(ObjectManager $manager)
+    public function getDependencies()
     {
-        $material = new Material();
-        $material->setNome('Armário');
-        $material->setAtivo(True);
-        $material->setCodigo('1');
-        $material->setTipo($this->getReference(UserFixtures::TIPOMATERIAL_REFERENCE));
-        $manager->flush();
+        return array(
+            TipoMaterialFixtures::class,
+        );
     }
 }
