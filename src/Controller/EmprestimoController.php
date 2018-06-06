@@ -186,6 +186,8 @@ class EmprestimoController extends Controller
 
             return $this->render('emprestimo/show.html.twig', array(
                 'emprestimo' => $emprestimo,
+                'replicado' => array(),
+                'wsfoto' => array(),
             ));
         }
 
