@@ -31,8 +31,7 @@ class EmprestimoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        // Mostrar apenas os não devolvidos: 'dataDevolucao'=>null
-        $emprestimos = $em->getRepository('App:Emprestimo')->findby(['dataDevolucao'=>null],array('material' => 'ASC'));
+        $emprestimos = $this->emprestimos();
 
         // Replicado
         $replicado = [];
@@ -44,28 +43,6 @@ class EmprestimoController extends Controller
                 }
             }
         }
-              
-
-/*
-            // Verificar se a pessoa já não possui armário emprestado
-            foreach($armarios_indisponiveis as $x){
-                if($emprestimo->getPessoaUsp() == $x->getPessoaUsp()){
-                    $this->addFlash('danger', sprintf('Armário não emprestado! Pois o usuário(a) %s 
-                        já tem o armário %s emprestado.',$emprestimo->getPessoaUsp(),$x->getArmario()));
-                    return $this->redirectToRoute('emprestimo_pessoausp_new');
-                }
-            }
-
-            $armario_em_quesao = $em->getRepository('AppBundle:Armario')->findOneById($emprestimo->getArmario());
-            if(!$armario_em_quesao->getAtivo()){
-                $this->addFlash('danger', sprintf('Armário não emprestado! 
-                    Pois armário %s está desativado, favor escolha outro armário!',$emprestimo->getArmario()));
-                return $this->redirectToRoute('emprestimo_pessoausp_new');
-            }
-            
-            // Quando a pessoa não tem vínculo nenhum com a FFLCH, pegar nome da tabela CATR_CRACHA
-            $nome = $pessoa ? $pessoa[0]['PESSOA_nompes'] : $cracha[0]['CATR_CRACHA_nompescra'];
-*/   
 
         return $this->render('emprestimo/index.html.twig', array(
             'emprestimos' => $emprestimos,
@@ -87,16 +64,30 @@ class EmprestimoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Armário já emprestado
             if(!$this->estaDisponivel($emprestimo)){
                 $this->addFlash('danger', sprintf('Erro: Item %s já está emprestado para outra pessoa!',
                                 $emprestimo->getMaterial()->getCodigo()));
                 return $this->redirectToRoute('emprestimo_usp');
             }
+
+            // Armário desativado
             if(!$emprestimo->getMaterial()->getAtivo()){
-                $this->addFlash('danger', sprintf('Erro: Item %s não pode ser emprestado no momento, pois está desativado.',
-                                $emprestimo->getMaterial()->getCodigo()));
+                $this->addFlash('danger', sprintf('Erro: Item %s não pode ser emprestado no momento, pois está desativado.',$emprestimo->getMaterial()->getCodigo()));
                 return $this->redirectToRoute('emprestimo_usp');
             }
+
+            // Não permite empréstimo de dois materiais do mesmo tipo
+            foreach($this->emprestimos() as $x){
+                if( ($emprestimo->getCodpes() == $x->getCodpes()) & 
+                    ($emprestimo->getMaterial()->getTipo() == $x->getMaterial()->getTipo())
+                  ){
+                    $this->addFlash('danger', sprintf('Item não emprestado! Pois o usuário(a) %s 
+                        já tem %s emprestado.',
+                        $emprestimo->getCodpes(),$x->getMaterial()->getTipo()));
+                    return $this->redirectToRoute('emprestimo_usp');
+                }
+            }  
 
             // Replicado
             $replicado = [];
@@ -148,37 +139,31 @@ class EmprestimoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // verifica se item já não está emprestado
             if(!$this->estaDisponivel($emprestimo)){
                 $this->addFlash('danger', sprintf('Erro: Item %s já está emprestado para outra pessoa!',
                                 $emprestimo->getMaterial()->getCodigo()));
                 return $this->redirectToRoute('emprestimo_visitante');
             }
+        
+            // item desativado
             if(!$emprestimo->getMaterial()->getAtivo()){
-                $this->addFlash('danger', sprintf('Erro: Item %s não pode ser emprestado no momento, pois está desativado.',
-                                $emprestimo->getMaterial()->getCodigo()));
+                $this->addFlash('danger', sprintf('Erro: Item %s não pode ser emprestado no momento,    pois está desativado.',$emprestimo->getMaterial()->getCodigo()));
                 return $this->redirectToRoute('emprestimo_visitante');
             }
 
-          
-/*
-
-            // Verificar se a pessoa já não possui armário emprestado
-            foreach($armarios_indisponiveis as $x){
-                if($emprestimo->getPessoaExterna() == $x->getPessoaExterna()){
-                    $this->addFlash('danger', sprintf('Armário não emprestado! Pois o usuário(a) %s 
-                        já tem o armário %s emprestado.',$emprestimo->getPessoaExterna(),$x->getArmario()));
-                    return $this->redirectToRoute('emprestimo_pessoaexterna_new');
+            // Não permite empréstimo de dois materiais do mesmo tipo
+            foreach($this->emprestimos() as $x){
+                if( ($emprestimo->getVisitante() == $x->getVisitante()) & 
+                    ($emprestimo->getMaterial()->getTipo() == $x->getMaterial()->getTipo())
+                  ){
+                    $this->addFlash('danger', sprintf('Item não emprestado! Pois o usuário(a) %s 
+                        já tem %s emprestado.',
+                        $emprestimo->getVisitante(),$x->getMaterial()->getTipo()));
+                    return $this->redirectToRoute('emprestimo_visitante');
                 }
-            }
-
-            $armario_em_quesao = $em->getRepository('AppBundle:Armario')->findOneById($emprestimo->getArmario());
-
-            if(!$armario_em_quesao->getAtivo()){
-                $this->addFlash('danger', sprintf('Armário não emprestado! 
-                    Pois armário %s está desativado, favor escolha outro armário!',$emprestimo->getArmario()));
-                    return $this->redirectToRoute('emprestimo_pessoaexterna_new');
-            }
-*/
+            }   
+  
             $emprestimo->setDataEmprestimo(new \DateTime());
             $emprestimo->setCreatedBy($this->getUser());
             $em->persist($emprestimo);
@@ -186,12 +171,11 @@ class EmprestimoController extends Controller
 
             return $this->render('emprestimo/show.html.twig', array(
                 'emprestimo' => $emprestimo,
-                'replicado' => array(),
-                'wsfoto' => array(),
+                'replicado' => [],
+                'wsfoto' => [],
             ));
         }
-
-        
+  
         return $this->render('emprestimo/visitante.html.twig', array(
             'emprestimo' => $emprestimo,
             'form' => $form->createView(),
@@ -269,19 +253,20 @@ class EmprestimoController extends Controller
     }
 
    /********************************** Utils Functions *****************************************/
+   //TODO:  Move this funtions to outside this class!
 
-    public function emprestados()
+    public function emprestimos()
     {
         $em = $this->getDoctrine()->getManager();
-        $emprestados = $em->getRepository('App:Emprestimo')->findby(['dataDevolucao'=>null],array('material' => 'ASC'));
-        return $emprestados;
+        $emprestimos = $em->getRepository('App:Emprestimo')->findby(['dataDevolucao'=>null],array('material' => 'ASC'));
+        return $emprestimos;
     }
 
     public function estaDisponivel($check)
     {
-        $emprestados = $this->emprestados();
+        $emprestimos = $this->emprestimos();
 
-        foreach($emprestados as $emprestado){
+        foreach($emprestimos as $emprestado){
             if($check->getMaterial() === $emprestado->getMaterial()){
                 return false;
             }

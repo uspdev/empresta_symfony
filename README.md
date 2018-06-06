@@ -4,23 +4,24 @@ Sistema para empréstimo de materiais (armários, CDs, Fones etc) durante a
 permanência dos usuários na Biblioteca. O material deve ter um código 
 identificador único que será lido com código de barra.
 
-## Features 
+## Features
+
+ Ações do grupo balcão:
+
+ - Gerenciar visitantes
+ - Empréstimo para visitante (externa à USP) - mediante cadastro prévio
+ - Empréstimo para pessoa USP
+ - Listagem dos itens emprestados e ainda não devolvidos
+ - Devolução
+ - Impressão dos códigos de barras
+ - Não permite empréstimo de dois materiais do mesmo tipo para mesma pessoa
 
 Ações do grupo administrador:
 
  - Gerenciar usuários do sistema
  - Gerenciamento dos tipos de materiais que serão emprestados: armários, fones etc
  - Gerenciamento dos materiais: criar, editar, apagar ou desativar.
- 
- Ações do grupo balcão:
-
- - Devolução
- - Empréstimo para visitante (externa à USP) - mediante cadastro prévio
- - Empréstimo para pessoa USP (dados da replicação, tabelas PESSOA e/ou CATR_CRACHA)
- - Listagem dos itens emprestados e ainda não devolvidos
- - Listagem de empréstimos concluídos no dia
- - Gerenciar visitantes
- - Impressão dos códigos de barras
+ - Histórico dos empréstimos por material
  
 ## Integração com outros serviços:
 
@@ -29,9 +30,9 @@ Ações do grupo administrador:
  - Inserir *true* na variável USAR_REPLICADO no arquivo .env
  - Configurar as variáveis correspondentes
  - baixar a estrutura das tabelas:
-  
+
     git clone git@git.uspdigital.usp.br:uspdev/replicado_queries vendor/uspdev/replicado/src/replicado_queries
-    
+
 ### WSfoto
 
  - Inserir *true* na variável USAR_WSFOTO em .env 
