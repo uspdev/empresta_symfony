@@ -32,7 +32,6 @@ Ações do grupo administrador:
  - Inserir *true* na variável USAR_REPLICADO no arquivo .env
  - Configurar as variáveis correspondentes
     - A tabela CRACHA é utilizada para pessoas externas a unidade
-    - Configurar a string de conexão do SGBD local do sistema em DATABASE_URL
  - baixar a estrutura das tabelas:
 
     git clone git@git.uspdigital.usp.br:uspdev/replicado_queries vendor/uspdev/replicado/src/replicado_queries
@@ -50,7 +49,8 @@ Download:
     cd empresta
     composer install
 
-Configurar .env e aplicar esquema no banco de dados:
+Configurar .env e aplicar esquema no banco de dados
+(a string de conexão do SGBD local do sistema é DATABASE_URL):
 
     php bin/console doctrine:migrations:migrate
 
