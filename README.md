@@ -31,6 +31,7 @@ Ações do grupo administrador:
 
  - Inserir *true* na variável USAR_REPLICADO no arquivo .env
  - Configurar as variáveis correspondentes
+    - A tabela CRACHA é utilizada para pessoas externas a unidade
  - baixar a estrutura das tabelas:
 
     git clone git@git.uspdigital.usp.br:uspdev/replicado_queries vendor/uspdev/replicado/src/replicado_queries
@@ -55,3 +56,8 @@ Configurar .env e aplicar esquema no banco de dados:
 Criar usuário *admin* e *balcao* e materiais de exemplo:
 
     php bin/console doctrine:fixtures:load
+
+Executando o servidor PHP
+    php bin/console server:run
+
+
