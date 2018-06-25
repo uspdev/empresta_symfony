@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Material index{% endblock %}
+
+{% block body %}
+    <h1>Materiais para Empréstimo</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Acões</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for code,barcode in barcodes %}
+            <tr>
+
+                           
+                <td><img src="data:image/png;base64,{{ barcode }}"> {{code}}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('material_new') }}" class="btn btn-success">Novo item</a>
+{% endblock %}

@@ -56,6 +56,9 @@
             "ref": "c1431086fec31f17fbcfe6d6d7e92059458facc1"
         }
     },
+    "doctrine/event-manager": {
+        "version": "1.0.x-dev"
+    },
     "doctrine/inflector": {
         "version": "v1.3.0"
     },
@@ -70,6 +73,15 @@
     },
     "doctrine/orm": {
         "version": "v2.6.1"
+    },
+    "doctrine/persistence": {
+        "version": "1.0.x-dev"
+    },
+    "doctrine/reflection": {
+        "version": "1.0.x-dev"
+    },
+    "dompdf/dompdf": {
+        "version": "dev-master"
     },
     "easycorp/easy-log-handler": {
         "version": "1.0",
@@ -113,6 +125,12 @@
     "ocramius/proxy-manager": {
         "version": "2.2.0"
     },
+    "phenx/php-font-lib": {
+        "version": "0.5.1"
+    },
+    "phenx/php-svg-lib": {
+        "version": "v0.3.2"
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -145,6 +163,9 @@
     },
     "pugx/autocompleter-bundle": {
         "version": "v1.4.1"
+    },
+    "sabberworm/php-css-parser": {
+        "version": "8.1.0"
     },
     "sensio/framework-extra-bundle": {
         "version": "4.0",

@@ -27,6 +27,7 @@
         "symfony/web-link": "^4.0",
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "^4.0",
+        "dompdf/dompdf": "dev-master",
         "uspdev/bootstrap-dashboard-bundle": "dev-master",
         "uspdev/replicado": "dev-master",
         "uspdev/wsfoto": "dev-master"

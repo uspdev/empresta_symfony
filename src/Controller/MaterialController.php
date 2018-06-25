@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Dompdf\Dompdf;
 
 /**
  * @Security("is_granted('ROLE_ADMIN')")
@@ -23,6 +24,33 @@ class MaterialController extends Controller
     public function index(MaterialRepository $materialRepository): Response
     {
         return $this->render('material/index.html.twig', ['materials' => $materialRepository->findAll()]);
+    }
+
+    /**
+     * @Route("/barcodes", name="material_barcodes", methods="GET")
+     */
+    public function barcodes(MaterialRepository $materialRepository): Response
+    {
+        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+        $materiais = $materialRepository->findAll();
+        $barcodes = [];
+        foreach ($materiais as $material) {
+            $barcodes[$material->getCodigo()] = base64_encode(
+                $generator->getBarcode($material->getCodigo(), 
+                $generator::TYPE_CODE_128)
+            );
+        }
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('hello world');
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream();
+
+/*        return $this->render('material/barcodes.html.twig', [
+            'barcodes' => $barcodes,
+        ]);
+*/
     }
 
     /**
@@ -73,7 +101,6 @@ class MaterialController extends Controller
 
         // barcode
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-        //$barcode = base64_encode($generator->getBarcode($material->getCodigo(), $generator::TYPE_CODE_39));
         $barcode = base64_encode($generator->getBarcode($material->getCodigo(), $generator::TYPE_CODE_128));
 
         // parameters to template
