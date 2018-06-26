@@ -33,24 +33,55 @@ class MaterialController extends Controller
     {
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
         $materiais = $materialRepository->findAll();
-        $barcodes = [];
-        foreach ($materiais as $material) {
-            $barcodes[$material->getCodigo()] = base64_encode(
-                $generator->getBarcode($material->getCodigo(), 
-                $generator::TYPE_CODE_128)
-            );
+
+        // Lógica temporária para gerar códigos de barras com 6 em cada linha
+        $n = count($materiais);
+        $trs = '';
+        for($i=0; $i < floor($n/6)*6; $i = $i+6){
+            $tr = '<tr>';
+            for($j=0; $j < 6; $j++){
+                $code = $materiais[$i+$j]->getCodigo();
+                $barcode = base64_encode($generator->getBarcode($code,$generator::TYPE_CODE_128));
+                $tr .= "<td><img src='data:image/png;base64,{$barcode}' width='80'> <br> {$code}</td>";
+            }
+            $tr .= '</tr>';
+            $trs .= $tr;
         }
+        // Faltantes
+        $tr = '<tr>';
+        for($i = floor($n/6)*6; $i < $n; $i++){
+            $code = $materiais[$i]->getCodigo();
+            $barcode = base64_encode($generator->getBarcode($code,$generator::TYPE_CODE_128));
+            $tr .= "<td><img src='data:image/png;base64,{$barcode}' width='80'> <br> {$code}</td>";
+        }
+        $faltantes = str_repeat("<td>Null</td>", 6 - $n%6);
+        $tr .= $faltantes;
+        $tr .= '</tr>';
+        $trs .= $tr;
+
+
+        $pdf = "
+            <html> <head> <style type='text/css'>
+            table {
+              width: 18cm;
+            }
+            td {
+              border: 1px solid black;
+              height: 1.7 cm;
+              text-align: center;
+            }
+            tr {
+            }
+            </style>
+            </head>
+            <body><table> {$trs}</table> </body>
+            </html>";
 
         $dompdf = new Dompdf();
-        $dompdf->loadHtml('hello world');
-        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->loadHtml($pdf);
+        $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $dompdf->stream();
-
-/*        return $this->render('material/barcodes.html.twig', [
-            'barcodes' => $barcodes,
-        ]);
-*/
+        $dompdf->stream('barcodes.pdf');
     }
 
     /**

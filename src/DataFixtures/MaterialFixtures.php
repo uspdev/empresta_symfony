@@ -13,7 +13,7 @@ class MaterialFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        for($i=1; $i<250; $i++) {
+        for($i=1; $i<=250; $i++) {
             $material = new Material();
             $material->setAtivo(True);
             $material->setCodigo($i);
