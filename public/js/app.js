@@ -16,12 +16,19 @@ jQuery.fn.preventDoubleSubmission = function() {
   // Keep chainability
   return this;
 };
-
 $('form').preventDoubleSubmission();
 
+// https://stackoverflow.com/questions/277544/how-to-set-the-focus-to-the-first-input-element-in-an-html-form-independent-from
+// Foco no primeiro input da página
+$(document).ready(function() {
+    $('form:first *:input[type!=hidden]:first').focus();
+});
 
+
+// É necessário testar melhor esse código
 // https://stackoverflow.com/questions/27960841/usb-barcode-scanner-opens-browsers-downloads-page
 // Problema com alguns leitores de códigos de barras no linux
+/*
 let data = ''
 window.onload = function () {
      window.document.body.addEventListener('keydown', function(event){
@@ -38,10 +45,4 @@ window.onload = function () {
         data += event.key
     });
 }
-
-// https://stackoverflow.com/questions/277544/how-to-set-the-focus-to-the-first-input-element-in-an-html-form-independent-from
-// Foco no primeiro input da página
-$(document).ready(function() {
-    $('form:first *:input[type!=hidden]:first').focus();
-});
-
+*/
