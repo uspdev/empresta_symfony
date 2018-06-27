@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7116c422afca7eac24425f8ae00a25ef",
+    "content-hash": "9e7cedcc989e875ab1d0be80fc60cb30",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -383,12 +383,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "99c4601f3972594036c51f251bdb686a6f83d329"
+                "reference": "217eaab81c56fda879a3515fc3bdb5e00e1f6b1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/99c4601f3972594036c51f251bdb686a6f83d329",
-                "reference": "99c4601f3972594036c51f251bdb686a6f83d329",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/217eaab81c56fda879a3515fc3bdb5e00e1f6b1f",
+                "reference": "217eaab81c56fda879a3515fc3bdb5e00e1f6b1f",
                 "shasum": ""
             },
             "require": {
@@ -460,7 +460,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2018-06-15T13:41:48+00:00"
+            "time": "2018-06-27T12:32:49+00:00"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -690,24 +690,23 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "dev-master",
+            "version": "1.3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "82890572668fc150f30046c5af7d6b277825c3b5"
+                "reference": "45d9b132b262c1d03835cdeefd42938d881556fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/82890572668fc150f30046c5af7d6b277825c3b5",
-                "reference": "82890572668fc150f30046c5af7d6b277825c3b5",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/45d9b132b262c1d03835cdeefd42938d881556fa",
+                "reference": "45d9b132b262c1d03835cdeefd42938d881556fa",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^3.0",
-                "phpunit/phpunit": "^7.0"
+                "phpunit/phpunit": "^6.2"
             },
             "type": "library",
             "extra": {
@@ -754,7 +753,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2018-05-08T11:02:15+00:00"
+            "time": "2018-06-15T19:03:38+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -1030,12 +1029,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "17896f6d56a2794a1619e019596ae627aabd8fd5"
+                "reference": "d7e44de8fd8046713e58254008b035ba19bbd89b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/17896f6d56a2794a1619e019596ae627aabd8fd5",
-                "reference": "17896f6d56a2794a1619e019596ae627aabd8fd5",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/d7e44de8fd8046713e58254008b035ba19bbd89b",
+                "reference": "d7e44de8fd8046713e58254008b035ba19bbd89b",
                 "shasum": ""
             },
             "require": {
@@ -1100,7 +1099,7 @@
             "keywords": [
                 "persistence"
             ],
-            "time": "2018-06-14T18:57:48+00:00"
+            "time": "2018-06-26T19:43:33+00:00"
         },
         {
             "name": "doctrine/reflection",
@@ -1186,12 +1185,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "2e643732cdb61fb09f867a15f2ae4e224503d1b0"
+                "reference": "7cd6f2c46fc9fa455ec91625865f445acaccb2f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/2e643732cdb61fb09f867a15f2ae4e224503d1b0",
-                "reference": "2e643732cdb61fb09f867a15f2ae4e224503d1b0",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/7cd6f2c46fc9fa455ec91625865f445acaccb2f9",
+                "reference": "7cd6f2c46fc9fa455ec91625865f445acaccb2f9",
                 "shasum": ""
             },
             "require": {
@@ -1240,7 +1239,7 @@
             ],
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
-            "time": "2018-04-08T15:07:27+00:00"
+            "time": "2018-06-27T00:45:33+00:00"
         },
         {
             "name": "econea/nusoap",
@@ -2814,12 +2813,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "dbe0fad88046a755dcf9379f2964c61a02f5ae3d"
+                "reference": "46f848122e7d1db087f818a5d93370e654448e73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/dbe0fad88046a755dcf9379f2964c61a02f5ae3d",
-                "reference": "dbe0fad88046a755dcf9379f2964c61a02f5ae3d",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/46f848122e7d1db087f818a5d93370e654448e73",
+                "reference": "46f848122e7d1db087f818a5d93370e654448e73",
                 "shasum": ""
             },
             "require": {
@@ -2862,7 +2861,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-06-08T09:39:36+00:00"
+            "time": "2018-06-27T21:05:46+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -2870,12 +2869,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "e761828a85d7dfc00b927f94ccbe1851ce0b6535"
+                "reference": "90bb6544aad8a600aac8ce651a768e5aacf240ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/e761828a85d7dfc00b927f94ccbe1851ce0b6535",
-                "reference": "e761828a85d7dfc00b927f94ccbe1851ce0b6535",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/90bb6544aad8a600aac8ce651a768e5aacf240ef",
+                "reference": "90bb6544aad8a600aac8ce651a768e5aacf240ef",
                 "shasum": ""
             },
             "require": {
@@ -2933,7 +2932,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2018-06-25T11:12:43+00:00"
+            "time": "2018-06-27T21:05:46+00:00"
         },
         {
             "name": "symfony/doctrine-bridge",
@@ -3014,6 +3013,63 @@
             "description": "Symfony Doctrine Bridge",
             "homepage": "https://symfony.com",
             "time": "2018-06-25T11:31:22+00:00"
+        },
+        {
+            "name": "symfony/dotenv",
+            "version": "4.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dotenv.git",
+                "reference": "f98b6b65e04dd51f40d2cfc81c2c833ff3773b1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/f98b6b65e04dd51f40d2cfc81c2c833ff3773b1e",
+                "reference": "f98b6b65e04dd51f40d2cfc81c2c833ff3773b1e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "symfony/process": "~3.4|~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Dotenv\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Registers environment variables from a .env file",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "time": "2018-05-30T07:26:09+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -4655,12 +4711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "2ddc6ec084eba809aec92bf723e007bc3a8345c0"
+                "reference": "288f5025158bfed92518ed6d439dd46966c37f8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/2ddc6ec084eba809aec92bf723e007bc3a8345c0",
-                "reference": "2ddc6ec084eba809aec92bf723e007bc3a8345c0",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/288f5025158bfed92518ed6d439dd46966c37f8a",
+                "reference": "288f5025158bfed92518ed6d439dd46966c37f8a",
                 "shasum": ""
             },
             "require": {
@@ -4727,7 +4783,7 @@
             ],
             "description": "Symfony Serializer Component",
             "homepage": "https://symfony.com",
-            "time": "2018-06-22T08:59:39+00:00"
+            "time": "2018-06-25T16:22:54+00:00"
         },
         {
             "name": "symfony/serializer-pack",
@@ -5423,12 +5479,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/replicado.git",
-                "reference": "81dfbeee660f54750ed25d4fb871a76e77955804"
+                "reference": "dd80d3967df35e4c0f368f45e5e13433c2d07e61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/replicado/zipball/81dfbeee660f54750ed25d4fb871a76e77955804",
-                "reference": "81dfbeee660f54750ed25d4fb871a76e77955804",
+                "url": "https://api.github.com/repos/uspdev/replicado/zipball/dd80d3967df35e4c0f368f45e5e13433c2d07e61",
+                "reference": "dd80d3967df35e4c0f368f45e5e13433c2d07e61",
                 "shasum": ""
             },
             "type": "library",
@@ -5450,7 +5506,7 @@
             ],
             "description": "Classes PHP que consome dados do Sybase Replicado",
             "homepage": "https://github.com/uspdev/replicado",
-            "time": "2018-06-11T12:21:16+00:00"
+            "time": "2018-06-27T20:23:52+00:00"
         },
         {
             "name": "uspdev/wsfoto",
@@ -5458,12 +5514,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/wsfoto.git",
-                "reference": "534a7dd930c6a94125fb5ed7394dcde6ebe12cf6"
+                "reference": "48d7a8b3b4cb3e1131f20b52b5c91835395a527b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/wsfoto/zipball/534a7dd930c6a94125fb5ed7394dcde6ebe12cf6",
-                "reference": "534a7dd930c6a94125fb5ed7394dcde6ebe12cf6",
+                "url": "https://api.github.com/repos/uspdev/wsfoto/zipball/48d7a8b3b4cb3e1131f20b52b5c91835395a527b",
+                "reference": "48d7a8b3b4cb3e1131f20b52b5c91835395a527b",
                 "shasum": ""
             },
             "require": {
@@ -5488,7 +5544,7 @@
             ],
             "description": "Classe PHP que abstrai requisições SOAP do wsfoto USP",
             "homepage": "https://github.com/uspdev/wsfoto",
-            "time": "2018-06-05T22:33:02+00:00"
+            "time": "2018-06-27T22:04:15+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -6269,63 +6325,6 @@
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
             "time": "2018-05-01T23:02:13+00:00"
-        },
-        {
-            "name": "symfony/dotenv",
-            "version": "4.1.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/dotenv.git",
-                "reference": "f98b6b65e04dd51f40d2cfc81c2c833ff3773b1e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dotenv/zipball/f98b6b65e04dd51f40d2cfc81c2c833ff3773b1e",
-                "reference": "f98b6b65e04dd51f40d2cfc81c2c833ff3773b1e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3"
-            },
-            "require-dev": {
-                "symfony/process": "~3.4|~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Dotenv\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Registers environment variables from a .env file",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "dotenv",
-                "env",
-                "environment"
-            ],
-            "time": "2018-05-30T07:26:09+00:00"
         },
         {
             "name": "symfony/maker-bundle",

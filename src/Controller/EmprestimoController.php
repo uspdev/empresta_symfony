@@ -103,7 +103,9 @@ class EmprestimoController extends Controller
             if( getenv('USAR_WSFOTO') == 'true') {         
                 $codpes = $emprestimo->getCodpes();
                 if(!empty($codpes)) {
-                    $wsfoto = Wsfoto::obter($codpes);
+                    if(Wsfoto::obter($codpes)) {
+                        $wsfoto = Wsfoto::obter($codpes);
+                    }
                 }
             }
 
@@ -241,7 +243,9 @@ class EmprestimoController extends Controller
         if( getenv('USAR_WSFOTO') == 'true') {         
             $codpes = $emprestimo->getCodpes();
             if(!empty($codpes)) {
-                $wsfoto = Wsfoto::obter($codpes);
+                if(Wsfoto::obter($codpes)) {
+                    $wsfoto = Wsfoto::obter($codpes);
+                }
             }
         }
 
@@ -276,12 +280,12 @@ class EmprestimoController extends Controller
 
     public function pessoaUSP($codpes)
     {
-        if(!empty(Pessoa::dump($codpes))) {
+        if(Pessoa::dump($codpes)['nompes']) {
             return Pessoa::dump($codpes)['nompes'] .' - '. Pessoa::email($codpes);
         }
-        else { 
+        else {
             if( getenv('USAR_TABELA_CRACHA') == 'true') {
-                if(!empty(Pessoa::cracha($codpes)['nompescra'])){
+                if(Pessoa::cracha($codpes)['nompescra']){
                     return Pessoa::cracha($codpes)['nompescra'];
                 }
                 else {
