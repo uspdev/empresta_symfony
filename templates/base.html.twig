@@ -1,10 +1,12 @@
 {% extends '@UspdevBootstrapDashboard/base.html.twig' %}
 
-{% block title %} {{ system_name | default('Empréstimos') }} {% endblock %}
-{% block system_name %} {{ system_name | default('Empréstimos') }} {% endblock %}
+{% block title %} {{ app_name }} {% endblock %}
+{% block system_name %}  
+    <img class='logo' src="{{  app_logo | default('http://www.imagens.usp.br/wp-content/uploads/USP-240x135.jpg') }}" width='120px' />
+{% endblock %}
 
 {% block search %}
-        {{ system_name | default('Biblioteca') }}
+  <span class="header"> {{ app_name }} </span>
 {% endblock %}
 
 {% block user %}
@@ -133,6 +135,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2-bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 {% endblock %}
 
