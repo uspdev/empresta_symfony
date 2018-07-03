@@ -32,8 +32,8 @@ Ações do grupo administrador:
  - Inserir *true* na variável USAR_REPLICADO no arquivo .env
  - Configurar as variáveis correspondentes
     - A tabela CRACHA é utilizada para pessoas externas a unidade
- - baixar a estrutura das tabelas:
-
+ - baixar a estrutura das tabelas do replicado:
+    
     git clone git@git.uspdigital.usp.br:uspdev/replicado_queries vendor/uspdev/replicado/src/replicado_queries
 
 ### WSfoto
@@ -49,12 +49,18 @@ Download:
     cd empresta
     composer install
 
-Configurar .env e aplicar esquema no banco de dados
-(a string de conexão do SGBD local do sistema é DATABASE_URL):
+Configurar variáveis no .env, sendo que 
+a string de conexão DATABASE_URL é obrigatória:
+
+    DATABASE_URL=mysql://USUARIO:SENHA@IP:3306/BANCO
+    APP_NAME='Sistema de Empréstimo de Armários - Biblioteca'
+    APP_LOGO_URL='http://www.fflch.usp.br/logo.png'
+
+Aplicar esquema no banco de dados
 
     php bin/console doctrine:migrations:migrate
 
-Criar usuário *admin* e *balcao* e materiais de exemplo:
+Criar usuário *admin* e *balcao* e cadastrar materiais de exemplo:
 
     php bin/console doctrine:fixtures:load
 
