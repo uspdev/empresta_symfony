@@ -28,9 +28,9 @@ $(document).ready(function () {
             }).done(function (res) {    // res can be a JSON object or an HTML string
                 if (typeof res === 'object') {
                     // if it'a a JSON, form is valid
-                    $modal.modal('hide');                
-                    var $input = $('#' + prefix + '_' + res.type); 
-                    $input.val(res.id).trigger('change'); //console.log(res.type);
+                    $modal.modal('hide');
+                    var $input = $('#' + prefix + '_' + res.type);
+                    $input.val(res.id).trigger('change'); //console.log(res);
                     // this workaround is needed because we can't set a val() to a non-existant option
                     $('.select2-chosen').each(function () {
                         if ($(this).parents('div').attr('id').indexOf(prefix + '_' + res.type) > -1) {
@@ -52,16 +52,16 @@ $(document).ready(function () {
             url_list: $('#url-list').attr('href'),
             url_get: $('#url-get').attr('href'),
             otherOptions: {
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 theme: 'boostrap',
-                formatNoMatches: 'Pessoa Externa nao encontrada! Por favor, faça o cadastro antes.',
+                formatNoMatches: 'Visitante não encontrado! Por favor, faça o cadastro antes.',
                 formatSearching: 'Buscando pessoa',
                 formatInputTooShort: 'Digite o nome da pessoa para iniciar a busca'
             }
         };
         $('#emprestimo_visitante_visitante').autocompleter(options);
         // following lines are only for "add new" feature. See README.
-        modalForm('app_visitante');
+        modalForm('emprestimo');
         var $addNew = $('<a>').text('Cadastrar Novo').attr('class', 'btn btn-sm btn-danger ajax-modal').attr('href', $('#url-new').attr('href'));
         $('label[for="emprestimo_visitante_visitante"]').after($addNew).after(' ');
     }());
