@@ -156,7 +156,7 @@ class EmprestimoController extends Controller
 
             // Não permite empréstimo de dois materiais do mesmo tipo
             foreach($this->emprestimos() as $x){
-                if( ($emprestimo->getVisitante() == $x->getVisitante()) & 
+                if( ($emprestimo->getVisitante() == $x->getVisitante()) &
                     ($emprestimo->getMaterial()->getTipo() == $x->getMaterial()->getTipo())
                   ){
                     $this->addFlash('danger', sprintf('Item não emprestado! Pois o usuário(a) %s 

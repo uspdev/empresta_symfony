@@ -61,7 +61,7 @@ $(document).ready(function () {
         };
         $('#emprestimo_visitante_visitante').autocompleter(options);
         // following lines are only for "add new" feature. See README.
-        modalForm('emprestimo');
+        modalForm('emprestimo_visitante');
         var $addNew = $('<a>').text('Cadastrar Novo').attr('class', 'btn btn-sm btn-danger ajax-modal').attr('href', $('#url-new').attr('href'));
         $('label[for="emprestimo_visitante_visitante"]').after($addNew).after(' ');
     }());
