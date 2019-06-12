@@ -24,7 +24,7 @@ Ações do grupo administrador:
  - Gerenciamento dos tipos de materiais que serão emprestados: armários, fones etc
  - Gerenciamento dos materiais: criar, editar, apagar ou desativar.
  - Histórico dos empréstimos por material
- 
+
 ## Integração com outros serviços:
 
 ### Replicado
@@ -42,6 +42,11 @@ Ações do grupo administrador:
  - Configurar as variáveis correspondentes
 
 # Deploy
+
+O arquivo .env é gerado automaticamente depois do composer install, mas
+caso isso não ocorra, pode-se gerá-lo a partir do template:
+
+    cp .env.dist .env 
 
 Download:
 
