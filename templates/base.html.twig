@@ -126,6 +126,8 @@
     {{ parent() }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.js"></script>
     <script src="{{ asset('bundles/pugxautocompleter/js/autocompleter-select2.js') }}"></script>
+    <script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('js/dataTables.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/visitante.js') }}"></script>
 {% endblock %}
@@ -135,6 +137,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2-bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 {% endblock %}
