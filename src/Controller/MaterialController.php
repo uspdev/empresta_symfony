@@ -122,13 +122,8 @@ class MaterialController extends Controller
             ->setParameter('material_id', $material->getId())
             ->orderBy('a.dataDevolucao', 'ASC')
             ->getQuery();
-
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            10/*limit per page*/
-        );
+        
+        $emprestimos = $query->execute();
 
         // barcode
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
@@ -138,7 +133,7 @@ class MaterialController extends Controller
         return $this->render('material/show.html.twig', [
             'material'    => $material,
             'barcode'     => $barcode,
-            'pagination'  => $pagination,
+            'emprestimos' => $emprestimos,
         ]);
     }
 

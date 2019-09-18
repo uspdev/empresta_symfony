@@ -61,6 +61,11 @@ a string de conexão DATABASE_URL é obrigatória:
     APP_NAME='Sistema de Empréstimo de Armários - Biblioteca'
     APP_LOGO_URL='http://www.fflch.usp.br/logo.png'
 
+Configurar em public/js/dataTables.js pageLength a quantidade de registros 
+padrão por página
+
+    pageLength  	: 25
+
 Aplicar esquema no banco de dados
 
     php bin/console doctrine:migrations:migrate
