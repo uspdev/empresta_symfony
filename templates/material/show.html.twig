@@ -29,7 +29,7 @@
    <h2>Empréstimos concluídos</h2>
 
     Quantidade de empréstimos realizados: {{ pagination.getTotalItemCount }}
-    <table class="table table-striped">
+    <table class="table table-striped datatable">
         <thead>
         <tr>
             <th>{{ knp_pagination_sortable(pagination, 'Empréstimo', ['a.dataEmprestimo']) }}</th>
