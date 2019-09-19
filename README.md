@@ -62,7 +62,7 @@ a string de conexão DATABASE_URL é obrigatória:
     APP_LOGO_URL='http://www.fflch.usp.br/logo.png'
 
 Configurar em public/js/dataTables.js pageLength a quantidade de registros 
-padrão por página
+padrão por página. Caso queira por padrão mostrar todos, deixe o valor em -1
 
     pageLength  	: 25
 
