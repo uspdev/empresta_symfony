@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Dompdf\Dompdf;
 
+use App\Empresta\Utils;
+
 /**
  * @Security("is_granted('ROLE_ADMIN')")
  * @Route("/material")
@@ -125,6 +127,17 @@ class MaterialController extends Controller
         
         $emprestimos = $query->execute();
 
+        // Replicado
+        $replicado = [];
+        if(getenv('USAR_REPLICADO')== 'true') {         
+            foreach($emprestimos as $emprestimo) {
+                $codpes = $emprestimo->getCodpes();
+                if(!empty($codpes)) {
+                    $replicado[$codpes] = Utils::pessoaUSP($codpes);
+                }
+            }
+        }
+
         // barcode
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
         $barcode = base64_encode($generator->getBarcode($material->getCodigo(), $generator::TYPE_CODE_128));
@@ -134,6 +147,7 @@ class MaterialController extends Controller
             'material'    => $material,
             'barcode'     => $barcode,
             'emprestimos' => $emprestimos,
+            'replicado'   => $replicado,
         ]);
     }
 

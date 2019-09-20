@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Uspdev\Wsfoto;
 use Uspdev\Replicado\Pessoa;
+use App\Empresta\Utils;
 
 /**
  * Emprestimo controller.
@@ -39,7 +40,7 @@ class EmprestimoController extends Controller
             foreach($emprestimos as $emprestimo) {
                 $codpes = $emprestimo->getCodpes();
                 if(!empty($codpes)) {
-                    $replicado[$codpes] = $this->pessoaUSP($codpes);
+                    $replicado[$codpes] = Utils::pessoaUSP($codpes);
                 }
             }
         }
@@ -94,7 +95,7 @@ class EmprestimoController extends Controller
             if( getenv('USAR_REPLICADO') == 'true') {         
                 $codpes = $emprestimo->getCodpes();
                 if(!empty($codpes)) {
-                    $replicado[$codpes] = $this->pessoaUSP($codpes);
+                    $replicado[$codpes] = Utils::pessoaUSP($codpes);
                 }
             }
 
@@ -234,7 +235,7 @@ class EmprestimoController extends Controller
         if( getenv('USAR_REPLICADO') == 'true') {         
             $codpes = $emprestimo->getCodpes();
             if(!empty($codpes)) {
-                $replicado[$codpes] = $this->pessoaUSP($codpes);
+                $replicado[$codpes] = Utils::pessoaUSP($codpes);
             }
         }
 
@@ -276,25 +277,5 @@ class EmprestimoController extends Controller
             }
         }
         return true;
-    }
-
-    public function pessoaUSP($codpes)
-    {
-        if(Pessoa::dump($codpes)['nompes']) {
-            return Pessoa::dump($codpes)['nompes'] .' - '. Pessoa::email($codpes);
-        }
-        else {
-            if( getenv('USAR_TABELA_CRACHA') == 'true') {
-                if(Pessoa::cracha($codpes)['nompescra']){
-                    return Pessoa::cracha($codpes)['nompescra'];
-                }
-                else {
-                    return 'Número USP não encontrado nos sistemas USP';
-                }
-            }
-            else {
-                return 'Número USP não encontrado nos sistemas USP';
-            }
-        }
     }
 }
