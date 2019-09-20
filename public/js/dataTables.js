@@ -14,6 +14,10 @@ $(function () {
             [ 10, 25, 50, 100, -1 ],
             [ '10 linhas', '25 linhas', '50 linhas', '100 linhas', 'Mostar todos' ]
         ],
-        pageLength  	: 25
+        pageLength  	: 25,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
     });
 })

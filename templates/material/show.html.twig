@@ -50,11 +50,15 @@
                 </td>
                 <td>
                     {% if emprestimo.visitante is empty %}
-                        {{ emprestimo.codpes }}
+                        {% if replicado is not empty %}
+                            {{ emprestimo.codpes }} - {{ replicado[emprestimo.codpes] }}
+                        {% else %}
+                            {{ emprestimo.codpes }}
+                        {% endif %}
                     {% else %}
-                        {{ emprestimo.visitante }}
+                        {{ emprestimo.visitante }} {{ emprestimo.visitante.email }} {{ emprestimo.visitante.telefone }}
                     {% endif %}
-                </td> 
+                </td>
             </tr>
             {% endfor %}
         </tbody>

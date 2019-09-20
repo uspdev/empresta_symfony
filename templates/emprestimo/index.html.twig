@@ -32,7 +32,7 @@
                             {{ emprestimo.codpes }}
                         {% endif %}
                     {% else %}
-                        {{ emprestimo.visitante }}
+                        {{ emprestimo.visitante }} {{ emprestimo.visitante.email }} {{ emprestimo.visitante.telefone }}
                     {% endif %}
                 </td>
                 <td> <a href="{{ path('emprestimo_show', {'id': emprestimo.id}) }}"><span class="oi oi-eye"></span></a></td>
