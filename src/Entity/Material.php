@@ -37,6 +37,11 @@ class Material
      */
     private $tipo;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $descricao;
+
     /** 
      * @ORM\OneToMany(targetEntity="Emprestimo",mappedBy="material")
      */
@@ -95,6 +100,18 @@ class Material
     public function setTipo(?TipoMaterial $tipo): self
     {
         $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    public function getDescricao(): ?string
+    {
+        return $this->descricao;
+    }
+
+    public function setDescricao(string $descricao): self
+    {
+        $this->descricao = $descricao;
 
         return $this;
     }
