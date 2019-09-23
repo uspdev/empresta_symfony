@@ -13,7 +13,10 @@
                 <th>Código</th>
                 <th>Tipo</th>
                 <th>Data do empréstimo</th>
-                <th>Pessoa</th>
+                <th>Nº USP</th>
+                <th>Nome</td>
+                <th>E-mail</th>
+                <th>Telefone</th>
                 <th>Ver</th>
             </tr>
         </thead>
@@ -23,20 +26,43 @@
                 <td>{{ emprestimo.material.codigo }}</td>
                 <td>{{ emprestimo.material.tipo }}</td>
                 <td>{% if emprestimo.dataEmprestimo %}{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}{% endif %}</td>
-
+                <td>
+                    {% if emprestimo.visitante is empty %}
+                        {{ emprestimo.codpes }}
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                </td>                
                 <td>
                     {% if emprestimo.visitante is empty %}
                         {% if replicado is not empty %}
-                            {{ emprestimo.codpes }} - {{ replicado[emprestimo.codpes] }}
+                            {{ replicado[emprestimo.codpes][0] }}
                         {% else %}
-                            {{ emprestimo.codpes }}
+                            &nbsp;
                         {% endif %}
                     {% else %}
-                        {{ emprestimo.visitante }} {{ emprestimo.visitante.email }} {{ emprestimo.visitante.telefone }}
+                        {{ emprestimo.visitante }}
                     {% endif %}
                 </td>
+                <td>
+                    {% if emprestimo.visitante is empty %}
+                        {% if replicado is not empty %}
+                            {{ replicado[emprestimo.codpes][1] }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% else %}
+                        {{ emprestimo.visitante.email }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if emprestimo.visitante is empty %}
+                        &nbsp;
+                    {% else %}
+                        {{ emprestimo.visitante.telefone }}
+                    {% endif %}                
+                </td>
                 <td> <a href="{{ path('emprestimo_show', {'id': emprestimo.id}) }}"><span class="oi oi-eye"></span></a></td>
-
             </tr>
         {% endfor %}
         </tbody>

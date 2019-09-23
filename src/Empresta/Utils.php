@@ -13,19 +13,23 @@ class Utils
     public static function pessoaUSP($codpes)
     {
         if(Pessoa::dump($codpes)['nompes']) {
-            return Pessoa::dump($codpes)['nompes'] .' '. Pessoa::email($codpes);
+            $pessoa = explode(',', Pessoa::dump($codpes)['nompes'] .','. Pessoa::email($codpes));
+            return $pessoa;
         }
         else {
             if( getenv('USAR_TABELA_CRACHA') == 'true') {
                 if(Pessoa::cracha($codpes)['nompescra']){
-                    return Pessoa::cracha($codpes)['nompescra'];
+                    $pessoa = explode(',', Pessoa::cracha($codpes)['nompescra'] .', ');
+                    return $pessoa;
                 }
                 else {
-                    return 'Número USP não encontrado nos sistemas USP';
+                    $pessoa = explode(',', 'Número USP não encontrado nos sistemas USP' .', ');
+                    return $pessoa;
                 }
             }
             else {
-                return 'Número USP não encontrado nos sistemas USP';
+                $pessoa = explode(',', 'Número USP não encontrado nos sistemas USP' .', ');
+                return $pessoa;
             }
         }
     }

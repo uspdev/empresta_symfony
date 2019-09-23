@@ -30,7 +30,7 @@
                 <td>
                     {% if emprestimo.visitante is empty %}
                         {% if replicado is not empty %}
-                            {{ emprestimo.codpes }} - {{ replicado[emprestimo.codpes] }}
+                            {{ emprestimo.codpes }} - {{ replicado[emprestimo.codpes][0] }} - {{ replicado[emprestimo.codpes][1] }}
                         {% else %}
                             {{ emprestimo.codpes }}
                         {% endif %}
