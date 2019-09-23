@@ -32,14 +32,15 @@
         <tr>
             <th>Empréstimo</th>
             <th>Devolução</th>
-            <th>Pessoa</th>
+            <th>Nº USP</th>
+            <th>Nome</td>
+            <th>E-mail</th>
+            <th>Telefone</th>
         </tr>
         </thead>
-
         <tbody>
             {% for emprestimo in emprestimos %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
-
                 <td>{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}</td>
                 <td>
                     {% if emprestimo.dataDevolucao %}
@@ -50,14 +51,39 @@
                 </td>
                 <td>
                     {% if emprestimo.visitante is empty %}
+                        {{ emprestimo.codpes }}
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                </td>                
+                <td>
+                    {% if emprestimo.visitante is empty %}
                         {% if replicado is not empty %}
-                            {{ emprestimo.codpes }} - {{ replicado[emprestimo.codpes] }}
+                            {{ replicado[emprestimo.codpes][0] }}
                         {% else %}
-                            {{ emprestimo.codpes }}
+                            &nbsp;
                         {% endif %}
                     {% else %}
-                        {{ emprestimo.visitante }} {{ emprestimo.visitante.email }} {{ emprestimo.visitante.telefone }}
+                        {{ emprestimo.visitante }}
                     {% endif %}
+                </td>
+                <td>
+                    {% if emprestimo.visitante is empty %}
+                        {% if replicado is not empty %}
+                            {{ replicado[emprestimo.codpes][1] }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    {% else %}
+                        {{ emprestimo.visitante.email }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if emprestimo.visitante is empty %}
+                        &nbsp;
+                    {% else %}
+                        {{ emprestimo.visitante.telefone }}
+                    {% endif %}                
                 </td>
             </tr>
             {% endfor %}
