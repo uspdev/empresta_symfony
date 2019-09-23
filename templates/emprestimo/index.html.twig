@@ -12,6 +12,7 @@
             <tr>
                 <th>Código</th>
                 <th>Tipo</th>
+                <th>Descrição</th>
                 <th>Data do empréstimo</th>
                 <th>Nº USP</th>
                 <th>Nome</td>
@@ -25,6 +26,7 @@
             <tr>
                 <td>{{ emprestimo.material.codigo }}</td>
                 <td>{{ emprestimo.material.tipo }}</td>
+                <td>{{ emprestimo.material.descricao }}</td>
                 <td>{% if emprestimo.dataEmprestimo %}{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}{% endif %}</td>
                 <td>
                     {% if emprestimo.visitante is empty %}

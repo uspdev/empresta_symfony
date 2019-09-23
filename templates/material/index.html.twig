@@ -13,6 +13,7 @@
             <tr>
                 <th>Código</th>
                 <th>Tipo</th>
+                <th>Descrição</th>
                 <th>Ativo</th>
                 <th>Acões</th>
             </tr>
@@ -22,6 +23,7 @@
             <tr>
                 <td>{{ material.codigo }}</td>
                 <td>{{ material.tipo }}</td>
+                <td>{{ material.descricao }}</td>
                 <td>{{ material.ativo ? 'Sim' : 'Não' }}</td>
                 <td>
                     <a href="{{ path('material_show', {'id': material.id}) }}"><span class="oi oi-eye"></span></a>
