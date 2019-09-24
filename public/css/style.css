@@ -13,3 +13,8 @@
     flex: 0 0 100%;
     max-width: 100%;
 }
+
+tbody tr.even:hover, tbody tr.even, 
+tbody tr.odd:hover, tbody tr.odd {
+	background-color: #ecffb3;
+}
