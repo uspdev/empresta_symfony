@@ -197,6 +197,8 @@ class EmprestimoController extends Controller
         $form = $this->createForm('App\Form\DevolucaoType',$emprestimo);
         $form->handleRequest($request);
 
+        $confirmarDevolucao = getenv('CONFIRMAR_DEVOLUCAO');
+
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
@@ -219,8 +221,9 @@ class EmprestimoController extends Controller
         }
 
         return $this->render('emprestimo/devolucao.html.twig', array(
-            'emprestimo' => $emprestimo,
-            'form' => $form->createView(),
+            'emprestimo'            => $emprestimo,
+            'form'                  => $form->createView(),
+            'confirmarDevolucao'    => $confirmarDevolucao,
         ));
 
     }

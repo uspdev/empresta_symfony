@@ -1,3 +1,14 @@
+// jQuery disable ENTER key
+jQuery.fn.disableEnter = function() {
+  $('form').keypress(function(e) {
+    //Enter key
+    if (e.which == 13) {
+        return false;
+    }
+  });
+};
+$('form').disableEnter();
+
 // jQuery plugin to prevent double submission of forms
 // https://stackoverflow.com/questions/2830542/prevent-double-submission-of-forms-in-jquery
 jQuery.fn.preventDoubleSubmission = function() {
