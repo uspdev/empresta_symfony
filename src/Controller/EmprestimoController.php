@@ -219,8 +219,8 @@ class EmprestimoController extends Controller
         }
 
         return $this->render('emprestimo/devolucao.html.twig', array(
-            'emprestimo' => $emprestimo,
-            'form' => $form->createView(),
+            'emprestimo'            => $emprestimo,
+            'form'                  => $form->createView(),
         ));
 
     }

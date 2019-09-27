@@ -137,6 +137,9 @@
     <script src="{{ asset('js/dataTables.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/visitante.js') }}"></script>
+    {% if (confirmarDevolucao == "true") %}
+        <script src="{{ asset('js/disableEnter.js') }}"></script>
+    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}
