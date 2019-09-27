@@ -7,3 +7,4 @@ twig:
     globals:
       app_name: '%env(APP_NAME)%'
       app_logo: '%env(APP_LOGO_URL)%'
+      confirmarDevolucao: '%env(CONFIRMAR_DEVOLUCAO)%'
