@@ -1,51 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Material{% endblock %}
-
 {% block body %}
-    <br />
-    <h1>Material</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Ativo</th>
-                <td>{{ material.ativo ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Código</th>
-                <td>{{ material.codigo }}</td>
-            </tr>
-            <tr>
-                <th>Descrição</th>
-                <td>{{ material.descricao }}</td>
-            </tr>            
-            <tr>
-                <th>Código de barra</th>
-                <td><img src="data:image/png;base64,{{ barcode }}"></td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="{{ path('material_index') }}" class='btn btn-success' >Voltar</a>
-    <a href="{{ path('material_edit', {'id': material.id}) }}" class='btn btn-success'>Editar</a>
-    
-   <hr>
-   <h2>Empréstimos concluídos</h2>
+    <br>
+    {{ parent() }}
+    <h1>Relatório de empréstimos</h1>
 
     <table class="table table-striped datatable">
         <thead>
-        <tr>
-            <th>Empréstimo</th>
-            <th>Devolução</th>
-            <th>Nº USP</th>
-            <th>Nome</td>
-            <th>E-mail</th>
-            <th>Telefone</th>
-        </tr>
+            <tr>
+                <th>Material</th>
+                <th>Tipo</th>
+                <th>Empréstimo</th>
+                <th>Devolução</th>
+                <th>Nº USP</th>
+                <th>Nome</td>
+                <th>E-mail</th>
+                <th>Telefone</th>
+            </tr>
         </thead>
         <tbody>
             {% for emprestimo in emprestimos %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
                 <td>{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}</td>
                 <td>
                     {% if emprestimo.dataDevolucao %}

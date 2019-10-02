@@ -257,6 +257,41 @@ class EmprestimoController extends Controller
         ]);
     }
 
+    /**
+     * Relatório
+     * 
+     * @Route("/relatorio", name="relatorio", methods="GET")
+     */
+    public function relatorio(): Response
+    {
+        // Empréstimos realizados
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('App:Emprestimo');
+        $query = $repository->createQueryBuilder('a')
+            ->innerJoin('a.material', 'g')
+            //->where('g.id = :material_id')
+            //->setParameter('material_id', $material->getId())
+            ->orderBy('a.dataDevolucao', 'ASC')
+            ->getQuery();
+        
+        $emprestimos = $query->execute();
+
+        // Replicado
+        $replicado = [];
+        if(getenv('USAR_REPLICADO')== 'true') {         
+            foreach($emprestimos as $emprestimo) {
+                $codpes = $emprestimo->getCodpes();
+                if(!empty($codpes)) {
+                    $replicado[$codpes] = Utils::pessoaUSP($codpes);
+                }
+            }
+        }
+
+        return $this->render('emprestimo/relatorio.html.twig', [
+            'emprestimos'   => $emprestimos,
+            'replicado'     => $replicado,
+        ]);
+    }    
    /********************************** Utils Functions *****************************************/
    //TODO:  Move this funtions to outside this class!
 

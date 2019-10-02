@@ -29,34 +29,40 @@
 <ul class="nav flex-column">  
     <li class="nav-item">
         <a class="nav-link active" href=" {{ path('emprestimo_devolucao')}}">
-            <span data-feather="file"></span>
+            <span data-feather="arrow-left-circle"></span>
             Devolução
         </a>
     </li>           
     <li class="nav-item">
         <a class="nav-link" href="{{ path('emprestimo_usp') }}">
-            <span data-feather="file"></span>
+            <span data-feather="arrow-right-circle"></span>
             Emprestar p/ Pessoa USP
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ path('emprestimo_visitante') }}">
-            <span data-feather="file"></span>
+            <span data-feather="arrow-right-circle"></span>
             Emprestar p/ Visitante
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href=" {{ path('visitante_index')}}">
-            <span data-feather="file"></span>
+            <span data-feather="users"></span>
            Gerenciar Visitantes
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href=" {{ path('emprestimo_index')}}">
-            <span data-feather="file"></span>
+            <span data-feather="log-out"></span>
             Itens emprestados
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href=" {{ path('relatorio')}}">
+            <span data-feather="file-text"></span>
+           Relatório
+        </a>
+    </li>     
 </ul>
 {% else%}
     <center>Faça login para ver as opções</center>
@@ -72,29 +78,29 @@
 <ul class="nav flex-column">             
     <li class="nav-item">
         <a class="nav-link active" href="{{ path('user_index') }}">
-            <span data-feather="home"></span>
+            <span data-feather="user"></span>
             Usuários do sistema
             <span class="sr-only">(current)</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href=" {{ path('material_index')}}">
-            <span data-feather="file"></span>
+            <span data-feather="archive"></span>
             Materiais
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href=" {{ path('tipo_material_index')}}">
-            <span data-feather="file"></span>
+            <span data-feather="list"></span>
            Categorias
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href=" {{ path('material_barcodes')}}">
-            <span data-feather="file"></span>
+            <span data-feather="bar-chart-2"></span>
            Códigos de Barras
         </a>
-    </li>
+    </li>   
 
 </ul>
 {% endif %}
