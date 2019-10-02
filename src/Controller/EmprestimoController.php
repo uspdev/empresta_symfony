@@ -269,11 +269,9 @@ class EmprestimoController extends Controller
         $repository = $em->getRepository('App:Emprestimo');
         $query = $repository->createQueryBuilder('a')
             ->innerJoin('a.material', 'g')
-            //->where('g.id = :material_id')
-            //->setParameter('material_id', $material->getId())
-            ->orderBy('a.dataDevolucao', 'ASC')
+            ->orderBy('a.dataEmprestimo', 'ASC')
             ->getQuery();
-        
+
         $emprestimos = $query->execute();
 
         // Replicado

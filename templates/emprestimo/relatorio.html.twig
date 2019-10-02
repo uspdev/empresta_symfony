@@ -9,20 +9,21 @@
         <thead>
             <tr>
                 <th>Material</th>
+                <th>Descrição</th>
                 <th>Tipo</th>
                 <th>Empréstimo</th>
                 <th>Devolução</th>
                 <th>Nº USP</th>
                 <th>Nome</td>
-                <th>E-mail</th>
-                <th>Telefone</th>
+                <th>Ver</th>
             </tr>
         </thead>
         <tbody>
             {% for emprestimo in emprestimos %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td>{{ emprestimo.material.codigo }}</td>
+                <td>{{ emprestimo.material.descricao }}</td>
+                <td>{{ emprestimo.material.tipo }}</td>
                 <td>{{ emprestimo.dataEmprestimo|date('H:i:s (d/m/Y)') }}</td>
                 <td>
                     {% if emprestimo.dataDevolucao %}
@@ -50,26 +51,11 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if emprestimo.visitante is empty %}
-                        {% if replicado is not empty %}
-                            {{ replicado[emprestimo.codpes][1] }}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-                    {% else %}
-                        {{ emprestimo.visitante.email }}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if emprestimo.visitante is empty %}
-                        &nbsp;
-                    {% else %}
-                        {{ emprestimo.visitante.telefone }}
-                    {% endif %}                
+                    <a href="{{ path('emprestimo_show', {'id': emprestimo.id}) }}"><span class="oi oi-eye"></span></a>               
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
 {% endblock %}
+
