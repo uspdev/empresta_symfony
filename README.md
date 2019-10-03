@@ -17,6 +17,7 @@ https://youtu.be/ruuHcMZPNxY
  - Devolução
  - Impressão dos códigos de barras
  - Não permite empréstimo de dois materiais do mesmo tipo para mesma pessoa
+ - Relatório
 
 Ações do grupo administrador:
 
