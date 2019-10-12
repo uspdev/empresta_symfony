@@ -259,19 +259,29 @@ class EmprestimoController extends Controller
 
     /**
      * Relatório
+     * Recebe dois parâmetros dataInicio e dataFim
+     * Por padrão os últimos 90 dias
      * 
      * @Route("/relatorio", name="relatorio", methods="GET")
      */
     public function relatorio(): Response
-    {
+    {        
+        // Últimos 90 dias
+        $objDataAtual = new \DateTime(date('Y-m-d H:i:s'));
+        $dataFim = $objDataAtual->format('Y-m-d H:i:s');
+        $objDataAtual->modify('-90 day');
+        $dataInicio = $objDataAtual->format('Y-m-d H:i:s');
+
         // Empréstimos realizados
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('App:Emprestimo');
         $query = $repository->createQueryBuilder('a')
             ->innerJoin('a.material', 'g')
-            ->orderBy('a.dataEmprestimo', 'ASC')
+            ->where("a.dataEmprestimo BETWEEN :dataInicio AND :dataFim")
+            ->setParameter('dataInicio', $dataInicio)    
+            ->setParameter('dataFim', $dataFim)        
+            ->orderBy('a.dataEmprestimo', 'DESC')
             ->getQuery();
-
         $emprestimos = $query->execute();
 
         // Replicado
