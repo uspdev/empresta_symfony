@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+use App\Empresta\Utils;
+
 /**
  * @Route("/user")
  */
@@ -21,7 +23,23 @@ class UserController extends Controller
      */
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('user/index.html.twig', ['users' => $userRepository->findAll()]);
+        $users = $userRepository->findAll();
+        
+        // Replicado
+        $replicado = [];
+        if (getenv('USAR_REPLICADO') == 'true') {         
+            foreach ($users as $user) {
+                $username = $user->getUsername();
+                if (is_numeric($username)) {
+                    $replicado[$username] = Utils::pessoaUSP($username);
+                }
+            }
+        }
+
+        return $this->render('user/index.html.twig', [
+            'users'     => $users,
+            'replicado' => $replicado,
+        ]);
     }
 
     /**
