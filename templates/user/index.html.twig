@@ -10,6 +10,8 @@
         <thead>
             <tr>
                 <th>Username</th>
+                <th>Nome</th>
+                <th>Perfil</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -17,6 +19,26 @@
         {% for user in users %}
             <tr>
                 <td>{{ user.username }}</td>
+                <td>
+                {% if replicado is not empty %}
+                    {% if user.username matches '/^\\d+$/' %}
+                        {{ replicado[user.username][0] }}
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                {% endif %}        
+                </td>
+                <td>
+                {% if (user.roles|length > 1) %}
+                    Balcão, Administrador do Sistema     
+                {% else %}    
+                    {% if (user.roles[0] == 'ROLE_USER') %}
+                        Balcão
+                    {% else %}
+                        Administrador do Sistema
+                    {% endif %}
+                {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}"><span class="oi oi-eye"></span></a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}"><span class="oi oi-pencil"></span></a>
