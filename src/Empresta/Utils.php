@@ -12,8 +12,8 @@ class Utils
       */
     public static function pessoaUSP($codpes)
     {
-        if(Pessoa::dump($codpes)['nompes']) {
-            $pessoa = explode(',', Pessoa::dump($codpes)['nompes'] .','. Pessoa::email($codpes));
+        if(Pessoa::dump($codpes)['nompesttd']) {
+            $pessoa = explode(',', Pessoa::dump($codpes)['nompesttd'] .','. Pessoa::email($codpes));
             return $pessoa;
         }
         else {
