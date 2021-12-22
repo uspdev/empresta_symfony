@@ -1,4 +1,4 @@
-# Empresta
+# Empresta (deprecado em favor do laravel)
 
 Sistema para empréstimo de materiais (armários, CDs, Fones etc) durante a
 permanência dos usuários na Biblioteca. O material deve ter um código 
